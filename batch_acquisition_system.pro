@@ -112,7 +112,8 @@ HEADERS  += \
     frmmessagebox.h \
     frmmain.h \
     mainwindowsforall.h \
-    work.h
+    work.h \
+    myproxystyle.h
 
 FORMS    += \
     login.ui \

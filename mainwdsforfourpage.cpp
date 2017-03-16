@@ -9,13 +9,13 @@ mainwdsforfourpage::mainwdsforfourpage(QWidget *parent) :
     ui(new Ui::mainwdsforfourpage)
 {
     ui->setupUi(this);
-    QFile styleSheet(":/qss/myStyle.qss");
-    if (!styleSheet.open(QIODevice::ReadOnly))
-    {
-        qWarning("Can't open the style sheet file.");
-        return;
-    }
-    qApp->setStyleSheet(styleSheet.readAll());
+//    QFile styleSheet(":/qss/myStyle.qss");
+//    if (!styleSheet.open(QIODevice::ReadOnly))
+//    {
+//        qWarning("Can't open the style sheet file.");
+//        return;
+//    }
+//    qApp->setStyleSheet(styleSheet.readAll());
     ViewProLine *vp=new ViewProLine();
     SetProLine *sp=new SetProLine();
     ModifyProLine *mp=new ModifyProLine();

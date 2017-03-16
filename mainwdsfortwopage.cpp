@@ -8,13 +8,13 @@ mainwdsfortwopage::mainwdsfortwopage(QWidget *parent) :
     ui(new Ui::mainwdsfortwopage)
 {
     ui->setupUi(this);
-    QFile styleSheet(":/qss/myStyle.qss");
-    if (!styleSheet.open(QIODevice::ReadOnly))
-    {
-        qWarning("Can't open the style sheet file.");
-        return;
-    }
-    qApp->setStyleSheet(styleSheet.readAll());
+//    QFile styleSheet(":/qss/myStyle.qss");
+//    if (!styleSheet.open(QIODevice::ReadOnly))
+//    {
+//        qWarning("Can't open the style sheet file.");
+//        return;
+//    }
+//    qApp->setStyleSheet(styleSheet.readAll());
     GetLog *gl=new GetLog();
     ui->tabWidget->insertTab(0,gl,"日志查看");
     SetPermissions *sp=new SetPermissions();

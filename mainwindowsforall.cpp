@@ -13,13 +13,13 @@ mainwindowsforall::mainwindowsforall(QWidget *parent) :
     ui(new Ui::mainwindowsforall)
 {
     ui->setupUi(this);
-    QFile styleSheet(":/qss/myStyle.qss");
-    if (!styleSheet.open(QIODevice::ReadOnly))
-    {
-        qWarning("Can't open the style sheet file.");
-        return;
-    }
-    qApp->setStyleSheet(styleSheet.readAll());
+//    QFile styleSheet(":/qss/myStyle.qss");
+//    if (!styleSheet.open(QIODevice::ReadOnly))
+//    {
+//        qWarning("Can't open the style sheet file.");
+//        return;
+//    }
+//    qApp->setStyleSheet(styleSheet.readAll());
     myHelper::FormInCenter(this);
     this->InitStyle();
     QPixmap pixmap1(":images/1.png");

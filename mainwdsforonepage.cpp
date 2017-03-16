@@ -8,13 +8,13 @@ mainwdsforonepage::mainwdsforonepage(QWidget *parent) :
     ui(new Ui::mainwdsforonepage)
 {
     ui->setupUi(this);
-    QFile styleSheet(":/qss/myStyle.qss");
-    if (!styleSheet.open(QIODevice::ReadOnly))
-    {
-        qWarning("Can't open the style sheet file.");
-        return;
-    }
-    qApp->setStyleSheet(styleSheet.readAll());
+//    QFile styleSheet(":/qss/myStyle.qss");
+//    if (!styleSheet.open(QIODevice::ReadOnly))
+//    {
+//        qWarning("Can't open the style sheet file.");
+//        return;
+//    }
+//    qApp->setStyleSheet(styleSheet.readAll());
 
     RegistrationInfo * re =new RegistrationInfo();
     ui->tabWidget->insertTab(0,re,"个人信息");

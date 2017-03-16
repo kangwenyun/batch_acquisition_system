@@ -16,13 +16,13 @@ GetLog::GetLog(QWidget *parent) :
     ui(new Ui::GetLog)
 {
     ui->setupUi(this);
-    QFile styleSheet(":/qss/myStyle.qss");
-    if (!styleSheet.open(QIODevice::ReadOnly))
-    {
-        qWarning("Can't open the style sheet file.");
-        return;
-    }
-    qApp->setStyleSheet(styleSheet.readAll());
+//    QFile styleSheet(":/qss/myStyle.qss");
+//    if (!styleSheet.open(QIODevice::ReadOnly))
+//    {
+//        qWarning("Can't open the style sheet file.");
+//        return;
+//    }
+//    qApp->setStyleSheet(styleSheet.readAll());
     ui->tableWidget->setColumnWidth(0,170);
     ui->tableWidget->setColumnWidth(1,70);
     ui->tableWidget->setRowCount(0);

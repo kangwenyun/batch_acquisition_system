@@ -19,13 +19,13 @@ RegistrationInfo::RegistrationInfo(QWidget *parent) :
     ui(new Ui::RegistrationInfo)
 {
     ui->setupUi(this);
-    QFile styleSheet(":/qss/myStyle.qss");
-    if (!styleSheet.open(QIODevice::ReadOnly))
-    {
-        qWarning("Can't open the style sheet file.");
-        return;
-    }
-    qApp->setStyleSheet(styleSheet.readAll());
+//    QFile styleSheet(":/qss/myStyle.qss");
+//    if (!styleSheet.open(QIODevice::ReadOnly))
+//    {
+//        qWarning("Can't open the style sheet file.");
+//        return;
+//    }
+//    qApp->setStyleSheet(styleSheet.readAll());
     new QPngLineEdit("", ui->userid_edit,"userid.png",0);
     new QPngLineEdit("", ui->username_edit,"name.jpg",0);
     new QPngLineEdit("", ui->age_edit,"age.jpg",0);
