@@ -7,7 +7,6 @@
 #include <QMessageBox>
 #include <QTableWidget>
 #include <QTableWidgetItem>
-#include <QFile>
 
 //对不同的用户设置不同的权限
 SetPermissions::SetPermissions(QWidget *parent) :
@@ -15,13 +14,6 @@ SetPermissions::SetPermissions(QWidget *parent) :
     ui(new Ui::SetPermissions)
 {
     ui->setupUi(this);
-//    QFile styleSheet(":/qss/myStyle.qss");
-//    if (!styleSheet.open(QIODevice::ReadOnly))
-//    {
-//        qWarning("Can't open the style sheet file.");
-//        return;
-//    }
-//    qApp->setStyleSheet(styleSheet.readAll());
     Session *curper = Session::getInstance();
     userId = curper->getUserId();
     // 自适应列宽度

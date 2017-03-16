@@ -146,6 +146,5 @@ FORMS    += \
 
 RESOURCES += \
     icons.qrc \
-    rc.qrc \
-    qss.qrc
+    rc.qrc
 
