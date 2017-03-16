@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/key.png</file>
+        <file>images/newKey.jpg</file>
+        <file>images/oldKey.jpg</file>
+        <file>images/userid.png</file>
+        <file>images/age.jpg</file>
+        <file>images/job.jpg</file>
+        <file>images/level.jpg</file>
+        <file>images/man.jpg</file>
+        <file>images/name.jpg</file>
+        <file>images/woman.jpg</file>
+        <file>images/1.png</file>
+        <file>images/3.png</file>
+        <file>images/5.png</file>
+        <file>images/2.png</file>
+        <file>images/4.png</file>
+        <file>images/11.jpg</file>
+    </qresource>
+</RCC>
