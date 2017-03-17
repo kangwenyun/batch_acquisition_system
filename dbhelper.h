@@ -58,6 +58,7 @@ private:
     //help function QaddDataWhileRefreshBatch
     Qres addData(Product product); //use in QaddDataWhileRefreshBatch
     Qres RefreshBatch(QString batchid);//use in QaddDataWhileRefreshBatch
+    Qres reduceBatch(QString batchid);//use in QaddDataWhileRefreshBatch
 };
 
 #endif // DBHELPER_H

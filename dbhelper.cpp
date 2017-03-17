@@ -373,10 +373,6 @@ Qres dbhelper::QdeleteData( QString userid,  Product deleteproduct)
         {
             // query.prepare("delete  from product where id = ?");
             //query.addBindValue((int)deleteproduct.id);
-
-            //
-            //
-            //
             //这里需要修改
             query.prepare("delete   from product where number=? and tray=? and batchid=?");
             query.addBindValue(deleteproduct.number);
@@ -387,8 +383,18 @@ Qres dbhelper::QdeleteData( QString userid,  Product deleteproduct)
                 _return.error=0;
                 _return.msg="删除货物成功,货物序号:"+deleteproduct.number+" 货物托盘号:"+deleteproduct.tray+" 货物批次号:"+deleteproduct.batchid;
                 _return.success=1;
+                //then refresh batch
+               Qres res=reduceBatch(deleteproduct.batchid);
+               if(res.success=1)
+               {
                 Loger::getInstance()->setLoger(userid,_return.msg);
                 return _return;
+               }
+               else
+               {
+                   Loger::getInstance()->setLoger(userid,res.msg);
+                   return res;
+               }
             }
             else
             {
@@ -592,11 +598,22 @@ Qres dbhelper::QaddBatch(QString userid,QString batchid,QString batchsum)
         }
         else
         {
+            QString number="0";
+            QSqlQuery numberquery;
+            numberquery.prepare("select count(*) from product where batchid=?");
+            numberquery.addBindValue(batchid);
+            if(numberquery.exec())
+            {
+                if(numberquery.next())
+                {
+                number=numberquery.value(0).toString();
+                }
+            }
             QSqlQuery query;
             query.prepare("insert into Batch  (batchid,batchsum,batchamout)  values ( :batchid,:batchsum,:batchamout)");
             query.bindValue(":batchid",batchid);
             query.bindValue(":batchsum",batchsum);
-            query.bindValue(":batchamout","0");
+            query.bindValue(":batchamout",number);
             if(query.exec())
             {
                 _return.error=0;
@@ -732,13 +749,63 @@ Qres dbhelper::RefreshBatch(QString batchid)
 {
     Qres _return;
     QSqlQuery query;
-    query.prepare("select batchamout from Batch where batchid=?");
+    query.prepare("select batchamout,batchsum from Batch where batchid=?");
     query.addBindValue(batchid);
     if(query.exec())
     {
         if(query.next())
         {
+
             int amout= query.value(0).toInt()+1;
+            QString batchamout= QString::number(amout);
+            QSqlQuery updatequery;
+            updatequery.prepare("update Batch set batchamout = ? where batchid=?");
+            updatequery.addBindValue(batchamout);
+            updatequery.addBindValue(batchid);
+            if(updatequery.exec())
+            {
+                //update success
+                _return.error=0;
+                _return.msg="刷新批次成功,批次号为:"+batchid;
+                _return.success=1;
+            }
+            else
+            {
+                //data base error
+                _return.error=1;
+                _return.msg="刷新批次号时发生数据库错误";
+                _return.success=0;
+            }
+        }
+        else
+        {
+            //not t batchid
+            _return.error=0;
+            _return.msg="刷新批次号时发现不存在该批次号";
+            _return.success=0;
+        }
+    }
+    else
+    {
+        //database error
+        _return.error=1;
+        _return.msg="刷新批次号时候发生数据库错误";
+        _return.success=0;
+    }
+    return _return;
+}
+Qres dbhelper::reduceBatch(QString batchid)
+{
+    Qres _return;
+    QSqlQuery query;
+    query.prepare("select batchamout,batchsum from Batch where batchid=?");
+    query.addBindValue(batchid);
+    if(query.exec())
+    {
+        if(query.next())
+        {
+
+            int amout= query.value(0).toInt()-1;
             QString batchamout= QString::number(amout);
             QSqlQuery updatequery;
             updatequery.prepare("update Batch set batchamout = ? where batchid=?");
