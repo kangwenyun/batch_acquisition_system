@@ -18,7 +18,7 @@ MaintainData::MaintainData(QWidget *parent) :
     ui->setupUi(this);
 //    // 自适应列宽度
 //    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->tableWidget->setColumnWidth(4,150);
+    ui->tableWidget->setColumnWidth(4,160);
     //select only rows
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     //把选中模式设为单选，即每次只选中一行，而不能选中多行

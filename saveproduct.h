@@ -4,9 +4,9 @@
 #include "product.h"
 #include "dbhelper.h"
 #include "session.h"
-#include <QAbstractButton>
-#include <QString>
 #include <QDialog>
+#include <QString>
+#include <QDateTimeEdit>
 
 //货物修改和增加的弹框
 namespace Ui {
@@ -24,6 +24,7 @@ public:
 
 private slots:
     void on_buttonBox_accepted();
+    virtual void accept();
 
 private:
     Ui::saveProduct *ui;
@@ -31,6 +32,8 @@ private:
     bool change;//1表示change,0表示add
 
     QString userId;
+    QDateTimeEdit *dateTimeEdit;
+    bool acc;
 };
 
 #endif // SAVEPRODUCT_H

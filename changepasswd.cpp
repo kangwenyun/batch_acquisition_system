@@ -1,7 +1,6 @@
 #include "changepasswd.h"
 #include "ui_changepasswd.h"
 #include "session.h"
-#include "utils.h"
 #include "qres.h"
 #include "dbhelper.h"
 #include "qpnglineedit.h"

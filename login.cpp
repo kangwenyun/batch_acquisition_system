@@ -3,7 +3,6 @@
 #include "registered.h"
 #include "getpasswd.h"
 #include "session.h"
-#include "utils.h"
 #include "dbhelper.h"
 #include "qres.h"
 #include "qpnglineedit.h"

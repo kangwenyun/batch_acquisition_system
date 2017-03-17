@@ -22,10 +22,13 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
+    virtual void accept();
+
 private:
     Ui::changePermision *ui;
     QString userId;
     UserInfo user_info;
+    bool acc;
 };
 
 #endif // CHANGEPERMISION_H

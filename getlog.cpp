@@ -8,8 +8,8 @@
 #include <QStringList>
 #include <QDate>
 #include <QDebug>
-#include<loger.h>
-#include<QObject>
+#include <loger.h>
+#include <QObject>
 //工作日志获得
 GetLog::GetLog(QWidget *parent) :
     QWidget(parent),

@@ -11,7 +11,7 @@ ViewData::ViewData(QWidget *parent) :
     ui(new Ui::ViewData)
 {
     ui->setupUi(this);
-    ui->tableWidget->setColumnWidth(4,150);
+    ui->tableWidget->setColumnWidth(4,160);
 //    // 自适应列宽度
 //    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     //select only rows

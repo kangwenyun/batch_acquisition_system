@@ -43,7 +43,6 @@ SOURCES += main.cpp \
     dbhelper.cpp \
     qres.cpp \
     quser.cpp \
-    utils.cpp \
     product.cpp \
     qbatch.cpp \
     saveproduct.cpp \
@@ -87,7 +86,6 @@ HEADERS  += \
     dbhelper.h \
     qres.h \
     quser.h \
-    utils.h \
     product.h \
     qbatch.h \
     qtray.h \

@@ -1,4 +1,3 @@
-
 #include "addbatch.h"
 #include "ui_addbatch.h"
 #include "qres.h"
@@ -17,6 +16,7 @@ addBatch::addBatch(QWidget *parent) :
     ui->tableWidget->setRowCount(1);
     Session *curper = Session::getInstance();
     userId = curper->getUserId();
+    acc = true;
     //将焦点聚集到item[0,0]上
   //  ui->tableWidget->item(0,0)->setSelected(true);
 }
@@ -28,20 +28,36 @@ addBatch::~addBatch()
 
 void addBatch::on_buttonBox_accepted()
 {
+    if(acc)
+    {
+        QString batchid = ui->tableWidget->item(0,0)->text();
+        QString batchsum = ui->tableWidget->item(0,1)->text();
+        Qres qre = dbhelper::getInstance()->QaddBatch(userId,batchid,batchsum);
+        if(!qre.success)
+        {
+            QMessageBox::warning(this,tr("warning"),qre.msg);
+        }
+    }
+}
+
+void addBatch::accept()
+{
+    int j = 0;//没有未填项
     //判断是否有未填项
-    for(int i = 0; i < 3; i++)
+    for(int i = 0; i < 2 ; i++)
     {
         if(ui->tableWidget->item(0,i)->text() == NULL)
         {
-            QMessageBox::warning(this,tr("warning"),tr("All items are required!"));
-            return;
+            j = QMessageBox::warning(this,tr("warning"),tr("请填满所有项!"));
+            break;
         }
     }
-    QString batchid = ui->tableWidget->item(0,0)->text();
-    QString batchsum = ui->tableWidget->item(0,1)->text();
-    Qres qre = dbhelper::getInstance()->QaddBatch(userId,batchid,batchsum);
-    if(!qre.success)
+    if( j == 0)
     {
-        QMessageBox::warning(this,tr("warning"),qre.msg);
+        acc = true;
+        QDialog::accept();
+    }else{
+        acc = false;
     }
 }
+

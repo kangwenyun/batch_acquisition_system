@@ -20,10 +20,12 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
+    virtual void accept();
+
 private:
     Ui::addBatch *ui;
-
     QString userId;
+    bool acc;
 };
 
 #endif // ADDBATCH_H

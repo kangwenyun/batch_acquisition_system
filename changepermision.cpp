@@ -24,17 +24,14 @@ changePermision::~changePermision()
 
 void changePermision::on_buttonBox_accepted()
 {
-    if(ui->tableWidget->item(0,2)->text() == NULL)
+    if(acc)
     {
-        QMessageBox::warning(this,tr("warning"),tr("All items are required!"));
-        return;
-    }
-    Qres qres = dbhelper::getInstance()->QsetPermission(userId,ui->tableWidget->item(0,0)->text(),
-                                      ui->tableWidget->item(0,2)->text());
-    if(!qres.success)
-    {
-        QMessageBox::warning(this,tr("warning"),qres.msg);
-        return;
+        Qres qres = dbhelper::getInstance()->QsetPermission(userId,ui->tableWidget->item(0,0)->text(),
+                                          ui->tableWidget->item(0,2)->text());
+        if(!qres.success)
+        {
+            QMessageBox::warning(this,tr("warning"),qres.msg);
+        }
     }
 }
 
@@ -50,4 +47,21 @@ void changePermision::setUserInfo(UserInfo user_info)
     user_name->setFlags(Qt::NoItemFlags);
     QTableWidgetItem *user_level = new QTableWidgetItem(user_info.level);
     ui->tableWidget->setItem(0,2,user_level);
+}
+
+void changePermision::accept()
+{
+    int j = 0;//没有未填项
+    //判断是否有未填项
+    if(ui->tableWidget->item(0,2)->text() == NULL )
+    {
+        j = QMessageBox::warning(this,tr("warning"),tr("请填满所有项!"));
+    }
+    if( j == 0)
+    {
+        acc = true;
+        QDialog::accept();
+    }else{
+        acc = false;
+    }
 }
