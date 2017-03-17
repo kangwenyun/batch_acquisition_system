@@ -68,3 +68,8 @@ void SetPermissions::on_refresh_button_clicked()
         ui->tableWidget->setItem(i,2,user_level);
     }
 }
+
+void SetPermissions::on_tableWidget_doubleClicked(const QModelIndex &index)
+{
+    on_change_button_clicked();
+}

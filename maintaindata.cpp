@@ -181,7 +181,7 @@ void MaintainData::load(QList<Product> proList)
         ui->tableWidget->setRowCount(1);
         ui->tableWidget->setSpan(0,0,1,6);
         ui->tableWidget->verticalHeader()->setVisible(false);
-        QTableWidgetItem *item = new QTableWidgetItem("数据库里还没有录入任何货物哦~~~");
+        QTableWidgetItem *item = new QTableWidgetItem(ui->dateEdit->date().toString("yyyy-MM-dd") + "日没有录入任何货物哦~~~");
         item->setTextAlignment(Qt::AlignCenter);
         ui->tableWidget->setItem(0,0,item);
         ui->tableWidget->setShowGrid(false);//隐藏表格线
@@ -219,4 +219,9 @@ void MaintainData::on_dateEdit_userDateChanged(const QDate &date)
 {
     QList<Product> proList = dbhelper::getInstance()->QgetDatathrouthTime(date.toString("yyyy-MM-dd"));
     load(proList);
+}
+
+void MaintainData::on_tableWidget_doubleClicked(const QModelIndex &index)
+{
+    on_data_change_clicked();
 }

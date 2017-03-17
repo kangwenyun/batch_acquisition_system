@@ -36,6 +36,8 @@ private slots:
 
     void on_dateEdit_userDateChanged(const QDate &date);
 
+    void on_tableWidget_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::MaintainData *ui;
     QString userId;//当前用户id

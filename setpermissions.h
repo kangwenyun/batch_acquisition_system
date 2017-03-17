@@ -23,6 +23,8 @@ private slots:
 
     void on_refresh_button_clicked();
 
+    void on_tableWidget_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::SetPermissions *ui;
     QString userId;
