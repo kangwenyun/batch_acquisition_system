@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 //    myHelper::SetStyle("navy");//天蓝色风格
     myHelper::SetChinese();
     dbhelper::getInstance();
-   // db.initdb();
+//    db->initdb();
     Login l;
     l.show();
     return a.exec();

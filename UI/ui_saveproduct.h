@@ -27,38 +27,21 @@ class Ui_saveProduct
 {
 public:
     QFormLayout *formLayout;
+    QTableWidget *tableWidget;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QDialogButtonBox *buttonBox;
-    QTableWidget *tableWidget;
 
     void setupUi(QDialog *saveProduct)
     {
         if (saveProduct->objectName().isEmpty())
             saveProduct->setObjectName(QStringLiteral("saveProduct"));
-        saveProduct->resize(616, 128);
+        saveProduct->resize(730, 122);
         formLayout = new QFormLayout(saveProduct);
         formLayout->setObjectName(QStringLiteral("formLayout"));
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(-1, 10, -1, -1);
-        horizontalSpacer = new QSpacerItem(528, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
-
-        buttonBox = new QDialogButtonBox(saveProduct);
-        buttonBox->setObjectName(QStringLiteral("buttonBox"));
-        buttonBox->setOrientation(Qt::Horizontal);
-        buttonBox->setStandardButtons(QDialogButtonBox::Ok);
-
-        horizontalLayout->addWidget(buttonBox);
-
-
-        formLayout->setLayout(1, QFormLayout::SpanningRole, horizontalLayout);
-
         tableWidget = new QTableWidget(saveProduct);
-        if (tableWidget->columnCount() < 5)
-            tableWidget->setColumnCount(5);
+        if (tableWidget->columnCount() < 6)
+            tableWidget->setColumnCount(6);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
@@ -69,27 +52,46 @@ public:
         tableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
         tableWidget->setHorizontalHeaderItem(4, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(5, __qtablewidgetitem5);
         if (tableWidget->rowCount() < 1)
             tableWidget->setRowCount(1);
-        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        __qtablewidgetitem5->setTextAlignment(Qt::AlignCenter);
-        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem5);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        tableWidget->setItem(0, 0, __qtablewidgetitem6);
+        __qtablewidgetitem6->setTextAlignment(Qt::AlignCenter);
+        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem6);
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        tableWidget->setItem(0, 1, __qtablewidgetitem7);
+        tableWidget->setItem(0, 0, __qtablewidgetitem7);
         QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
-        tableWidget->setItem(0, 2, __qtablewidgetitem8);
+        tableWidget->setItem(0, 1, __qtablewidgetitem8);
         QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
-        tableWidget->setItem(0, 3, __qtablewidgetitem9);
+        tableWidget->setItem(0, 2, __qtablewidgetitem9);
         QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
-        tableWidget->setItem(0, 4, __qtablewidgetitem10);
+        tableWidget->setItem(0, 3, __qtablewidgetitem10);
+        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
+        tableWidget->setItem(0, 5, __qtablewidgetitem11);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
         tableWidget->setMinimumSize(QSize(400, 60));
         tableWidget->setMaximumSize(QSize(16777215, 60));
         tableWidget->verticalHeader()->setVisible(false);
 
         formLayout->setWidget(0, QFormLayout::SpanningRole, tableWidget);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(-1, 10, -1, -1);
+        horizontalSpacer = new QSpacerItem(528, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        buttonBox = new QDialogButtonBox(saveProduct);
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
+        buttonBox->setOrientation(Qt::Horizontal);
+        buttonBox->setStandardButtons(QDialogButtonBox::Save);
+
+        horizontalLayout->addWidget(buttonBox);
+
+
+        formLayout->setLayout(1, QFormLayout::SpanningRole, horizontalLayout);
 
 
         retranslateUi(saveProduct);
@@ -111,9 +113,11 @@ public:
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(3);
         ___qtablewidgetitem3->setText(QApplication::translate("saveProduct", "\350\264\247\347\211\251\347\261\273\345\236\213", 0));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("saveProduct", "\345\244\207\346\263\250", 0));
-        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->verticalHeaderItem(0);
-        ___qtablewidgetitem5->setText(QApplication::translate("saveProduct", "1", 0));
+        ___qtablewidgetitem4->setText(QApplication::translate("saveProduct", "\345\275\225\345\205\245\346\227\266\351\227\264", 0));
+        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->horizontalHeaderItem(5);
+        ___qtablewidgetitem5->setText(QApplication::translate("saveProduct", "\345\244\207\346\263\250", 0));
+        QTableWidgetItem *___qtablewidgetitem6 = tableWidget->verticalHeaderItem(0);
+        ___qtablewidgetitem6->setText(QApplication::translate("saveProduct", "1", 0));
 
         const bool __sortingEnabled = tableWidget->isSortingEnabled();
         tableWidget->setSortingEnabled(false);

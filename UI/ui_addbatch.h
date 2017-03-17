@@ -19,15 +19,15 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
-#include <QtWidgets/QWidget>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_addBatch
 {
 public:
+    QVBoxLayout *verticalLayout;
     QTableWidget *tableWidget;
-    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QDialogButtonBox *buttonBox;
@@ -36,42 +36,42 @@ public:
     {
         if (addBatch->objectName().isEmpty())
             addBatch->setObjectName(QStringLiteral("addBatch"));
-        addBatch->resize(400, 120);
+        addBatch->resize(400, 116);
+        verticalLayout = new QVBoxLayout(addBatch);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         tableWidget = new QTableWidget(addBatch);
-        if (tableWidget->columnCount() < 3)
-            tableWidget->setColumnCount(3);
+        if (tableWidget->columnCount() < 2)
+            tableWidget->setColumnCount(2);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         __qtablewidgetitem->setTextAlignment(Qt::AlignCenter);
         tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         __qtablewidgetitem1->setTextAlignment(Qt::AlignCenter);
         tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        __qtablewidgetitem2->setTextAlignment(Qt::AlignCenter);
-        tableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         if (tableWidget->rowCount() < 1)
             tableWidget->setRowCount(1);
-        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem2);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        tableWidget->setGeometry(QRect(0, 0, 401, 61));
         tableWidget->horizontalHeader()->setStretchLastSection(true);
-        layoutWidget = new QWidget(addBatch);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(1, 80, 401, 29));
-        horizontalLayout = new QHBoxLayout(layoutWidget);
+
+        verticalLayout->addWidget(tableWidget);
+
+        horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        horizontalSpacer = new QSpacerItem(208, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(298, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        buttonBox = new QDialogButtonBox(layoutWidget);
+        buttonBox = new QDialogButtonBox(addBatch);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Save);
 
         horizontalLayout->addWidget(buttonBox);
+
+
+        verticalLayout->addLayout(horizontalLayout);
 
 
         retranslateUi(addBatch);
@@ -88,10 +88,8 @@ public:
         ___qtablewidgetitem->setText(QApplication::translate("addBatch", "\346\211\271\346\254\241ID", 0));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QApplication::translate("addBatch", "\350\264\247\347\211\251\346\200\273\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("addBatch", "\346\211\271\346\254\241\345\267\262\346\234\211\346\225\260", 0));
-        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->verticalHeaderItem(0);
-        ___qtablewidgetitem3->setText(QApplication::translate("addBatch", "1", 0));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->verticalHeaderItem(0);
+        ___qtablewidgetitem2->setText(QApplication::translate("addBatch", "1", 0));
     } // retranslateUi
 
 };

@@ -51,9 +51,11 @@ void GetLog::getData(QString fileTime)
     QTextStream tsIn(&fileIn);
     //先清空旧的列表
     ui->tableWidget->setRowCount(0);
+    int i = 0;//0文件没数据,1有数据
     //加载表格数据
     while( !tsIn.atEnd() )
     {
+        i = 1;
         //获得数据
         QString line = tsIn.readLine();
         line = line.trimmed();
@@ -70,6 +72,16 @@ void GetLog::getData(QString fileTime)
         ui->tableWidget->setItem(nOldRowCount,1,item_1);
         QTableWidgetItem *item_2 = new QTableWidgetItem(list.at(2));
         ui->tableWidget->setItem(nOldRowCount,2,item_2);
+    }
+    if( i == 0)
+    {
+        ui->tableWidget->setRowCount(1);
+        ui->tableWidget->setSpan(0,0,1,3);
+        ui->tableWidget->verticalHeader()->setVisible(false);
+        QTableWidgetItem *item = new QTableWidgetItem(ui->dateEdit->date().toString("yyyy-MM-dd") + "日没登录系统哦~~~");
+        item->setTextAlignment(Qt::AlignCenter);
+        ui->tableWidget->setItem(0,0,item);
+        ui->tableWidget->setShowGrid(false);//隐藏表格线
     }
     fileIn.close();
 }

@@ -23,10 +23,6 @@ ViewData::ViewData(QWidget *parent) :
     userId = curper->getUserId();
     on_data_refresh_clicked();
     //定时检查文件并且刷新
-   // refresh();
-   // QTimer * timer=new QTimer(this);
-   // QObject::connect(timer,SIGNAL(timeout()),this,SLOT(refresh()));
-    //timer->start(3000);
     work* thread1=new work();
     QObject::connect(thread1, SIGNAL(log(QString)), this, SLOT(Log(QString)));
    thread1->start();
@@ -77,6 +73,17 @@ void ViewData::on_data_refresh_clicked()
     QDateTime time= QDateTime::currentDateTime();
     QList<Product> proList =   dbhelper::getInstance()->QgetDatathrouthTime(time.toString("yyyy-MM-dd"));
     int l = proList.length();
+    if( l == 0)
+    {
+        ui->tableWidget->setRowCount(1);
+        ui->tableWidget->setSpan(0,0,1,6);
+        ui->tableWidget->verticalHeader()->setVisible(false);
+        QTableWidgetItem *item = new QTableWidgetItem("今天还没有录入任何货物哦~~~");
+        item->setTextAlignment(Qt::AlignCenter);
+        ui->tableWidget->setItem(0,0,item);
+        ui->tableWidget->setShowGrid(false);//隐藏表格线
+        return;
+    }
     ui->tableWidget->setRowCount(l);
     int j = 0;//列计数
     for(int i = 0; i<l ;i++)//行

@@ -82,6 +82,7 @@ public:
         tableWidget->setContextMenuPolicy(Qt::NoContextMenu);
         tableWidget->setAcceptDrops(false);
         tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidget->setShowGrid(true);
         tableWidget->horizontalHeader()->setStretchLastSection(true);
 
         verticalLayout->addWidget(tableWidget);

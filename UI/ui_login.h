@@ -25,7 +25,6 @@ QT_BEGIN_NAMESPACE
 class Ui_Login
 {
 public:
-    QLabel *login_label;
     QPushButton *login;
     QPushButton *registered;
     QPushButton *get_passwd;
@@ -42,38 +41,35 @@ public:
         if (Login->objectName().isEmpty())
             Login->setObjectName(QStringLiteral("Login"));
         Login->resize(400, 300);
-        login_label = new QLabel(Login);
-        login_label->setObjectName(QStringLiteral("login_label"));
-        login_label->setGeometry(QRect(40, 30, 30, 15));
-        QFont font;
-        font.setPointSize(9);
-        login_label->setFont(font);
         login = new QPushButton(Login);
         login->setObjectName(QStringLiteral("login"));
         login->setGeometry(QRect(83, 170, 231, 27));
-        QFont font1;
-        font1.setPointSize(13);
-        login->setFont(font1);
+        QFont font;
+        font.setPointSize(13);
+        login->setFont(font);
+        login->setStyleSheet(QStringLiteral(""));
         registered = new QPushButton(Login);
         registered->setObjectName(QStringLiteral("registered"));
-        registered->setGeometry(QRect(225, 195, 29, 23));
-        registered->setFont(font);
-        registered->setStyleSheet(QLatin1String("color: rgb(255, 0, 0);\n"
-"background-color: rgba(255, 255, 255, 0);"));
+        registered->setGeometry(QRect(220, 195, 32, 23));
+        QFont font1;
+        font1.setPointSize(9);
+        registered->setFont(font1);
+        registered->setStyleSheet(QLatin1String("background-color: rgba(255, 255, 255, 0);\n"
+"color: rgb(170, 0, 0);"));
         get_passwd = new QPushButton(Login);
         get_passwd->setObjectName(QStringLiteral("get_passwd"));
-        get_passwd->setGeometry(QRect(256, 195, 64, 23));
-        get_passwd->setFont(font);
-        get_passwd->setStyleSheet(QLatin1String("color: rgb(255, 0, 0);\n"
-"background-color: rgba(255, 255, 255, 0);"));
+        get_passwd->setGeometry(QRect(256, 195, 67, 23));
+        get_passwd->setFont(font1);
+        get_passwd->setStyleSheet(QLatin1String("background-color: rgba(255, 255, 255, 0);\n"
+"color: rgb(255, 0, 0);"));
         err_label = new QLabel(Login);
         err_label->setObjectName(QStringLiteral("err_label"));
         err_label->setGeometry(QRect(115, 143, 171, 16));
-        err_label->setFont(font);
+        err_label->setFont(font1);
         err_label->setStyleSheet(QStringLiteral("color: rgb(255, 0, 0);"));
         label = new QLabel(Login);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(254, 199, 1, 16));
+        label->setGeometry(QRect(253, 200, 1, 16));
         label->setStyleSheet(QLatin1String("background-color: rgb(207, 207, 207);\n"
 "color: rgb(207, 207, 207);"));
         layoutWidget = new QWidget(Login);
@@ -87,13 +83,13 @@ public:
         userId = new QLineEdit(layoutWidget);
         userId->setObjectName(QStringLiteral("userId"));
         userId->setMinimumSize(QSize(0, 20));
-        userId->setFont(font1);
+        userId->setFont(font);
 
         verticalLayout->addWidget(userId);
 
         passwd = new QLineEdit(layoutWidget);
         passwd->setObjectName(QStringLiteral("passwd"));
-        passwd->setFont(font1);
+        passwd->setFont(font);
 
         verticalLayout->addWidget(passwd);
 
@@ -102,7 +98,6 @@ public:
         label_2->setGeometry(QRect(0, 0, 401, 301));
         label_2->setStyleSheet(QStringLiteral("border-image: url(:/images/11.jpg);"));
         label_2->raise();
-        login_label->raise();
         login->raise();
         registered->raise();
         get_passwd->raise();
@@ -121,7 +116,6 @@ public:
     void retranslateUi(QWidget *Login)
     {
         Login->setWindowTitle(QApplication::translate("Login", "Widget", 0));
-        login_label->setText(QApplication::translate("Login", "\347\231\273\345\275\225", 0));
         login->setText(QApplication::translate("Login", "\347\231\273\345\275\225", 0));
         registered->setText(QApplication::translate("Login", "\346\263\250\345\206\214", 0));
         get_passwd->setText(QApplication::translate("Login", "\345\277\230\350\256\260\345\257\206\347\240\201\357\274\237", 0));

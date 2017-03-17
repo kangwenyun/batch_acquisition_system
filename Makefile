@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = batch_acquisition_system1.0.0
-DISTDIR = /home/wenyun/桌面/QT/batch_acquisition_system/.tmp/batch_acquisition_system1.0.0
+DISTDIR = /home/wenyun/桌面/batch_acquisition_system/.tmp/batch_acquisition_system1.0.0
 LINK          = g++
 LFLAGS        = -m64 -Wl,-O1
 LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5Widgets -lQt5Gui -lQt5Sql -lQt5Core -lGL -lpthread 
@@ -52,7 +52,6 @@ SOURCES       = main.cpp \
 		login.cpp \
 		registered.cpp \
 		getpasswd.cpp \
-		mainwindow.cpp \
 		changepasswd.cpp \
 		authentication.cpp \
 		registrationinfo.cpp \
@@ -67,7 +66,6 @@ SOURCES       = main.cpp \
 		dbhelper.cpp \
 		qres.cpp \
 		quser.cpp \
-		utils.cpp \
 		product.cpp \
 		qbatch.cpp \
 		saveproduct.cpp \
@@ -96,7 +94,6 @@ SOURCES       = main.cpp \
 		moc_login.cpp \
 		moc_registered.cpp \
 		moc_getpasswd.cpp \
-		moc_mainwindow.cpp \
 		moc_changepasswd.cpp \
 		moc_authentication.cpp \
 		moc_registrationinfo.cpp \
@@ -127,7 +124,6 @@ OBJECTS       = main.o \
 		login.o \
 		registered.o \
 		getpasswd.o \
-		mainwindow.o \
 		changepasswd.o \
 		authentication.o \
 		registrationinfo.o \
@@ -142,7 +138,6 @@ OBJECTS       = main.o \
 		dbhelper.o \
 		qres.o \
 		quser.o \
-		utils.o \
 		product.o \
 		qbatch.o \
 		saveproduct.o \
@@ -172,7 +167,6 @@ OBJECTS       = main.o \
 		moc_login.o \
 		moc_registered.o \
 		moc_getpasswd.o \
-		moc_mainwindow.o \
 		moc_changepasswd.o \
 		moc_authentication.o \
 		moc_registrationinfo.o \
@@ -258,7 +252,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		batch_acquisition_system.pro login.h \
 		registered.h \
 		getpasswd.h \
-		mainwindow.h \
 		changepasswd.h \
 		authentication.h \
 		registrationinfo.h \
@@ -273,7 +266,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		dbhelper.h \
 		qres.h \
 		quser.h \
-		utils.h \
 		product.h \
 		qbatch.h \
 		qtray.h \
@@ -298,11 +290,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		frmmessagebox.h \
 		frmmain.h \
 		mainwindowsforall.h \
-		work.h main.cpp \
+		work.h \
+		myproxystyle.h main.cpp \
 		login.cpp \
 		registered.cpp \
 		getpasswd.cpp \
-		mainwindow.cpp \
 		changepasswd.cpp \
 		authentication.cpp \
 		registrationinfo.cpp \
@@ -317,7 +309,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		dbhelper.cpp \
 		qres.cpp \
 		quser.cpp \
-		utils.cpp \
 		product.cpp \
 		qbatch.cpp \
 		saveproduct.cpp \
@@ -369,7 +360,7 @@ first: all
 
 ####### Build rules
 
-$(TARGET): UI/ui_login.h UI/ui_registered.h UI/ui_getpasswd.h UI/ui_mainwindow.h UI/ui_changepasswd.h UI/ui_authentication.h UI/ui_registrationinfo.h UI/ui_getlog.h UI/ui_viewbatch.h UI/ui_setpermissions.h UI/ui_viewproline.h UI/ui_setproline.h UI/ui_modifyproline.h UI/ui_saveproduct.h UI/ui_maintaindata.h UI/ui_viewdata.h UI/ui_addbatch.h UI/ui_changepermision.h UI/ui_test.h UI/ui_mainwds.h UI/ui_mainwdsforonepage.h UI/ui_mainwdsfortwopage.h UI/ui_mainwdsforthreepage.h UI/ui_mainwdsforfivepage.h UI/ui_mainwdsforfourpage.h UI/ui_frmmessagebox.h UI/ui_frmmain.h UI/ui_mainwindowsforall.h $(OBJECTS)  
+$(TARGET): UI/ui_login.h UI/ui_registered.h UI/ui_getpasswd.h UI/ui_changepasswd.h UI/ui_authentication.h UI/ui_registrationinfo.h UI/ui_getlog.h UI/ui_viewbatch.h UI/ui_setpermissions.h UI/ui_viewproline.h UI/ui_setproline.h UI/ui_modifyproline.h UI/ui_saveproduct.h UI/ui_maintaindata.h UI/ui_viewdata.h UI/ui_addbatch.h UI/ui_changepermision.h UI/ui_test.h UI/ui_mainwds.h UI/ui_mainwdsforonepage.h UI/ui_mainwdsfortwopage.h UI/ui_mainwdsforthreepage.h UI/ui_mainwdsforfivepage.h UI/ui_mainwdsforfourpage.h UI/ui_frmmessagebox.h UI/ui_frmmain.h UI/ui_mainwindowsforall.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: batch_acquisition_system.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -514,9 +505,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents icons.qrc rc.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents login.h registered.h getpasswd.h mainwindow.h changepasswd.h authentication.h registrationinfo.h getlog.h viewbatch.h setpermissions.h viewproline.h setproline.h modifyproline.h session.h serverservice.h dbhelper.h qres.h quser.h utils.h product.h qbatch.h qtray.h saveproduct.h loger.h maintaindata.h viewdata.h addbatch.h filedata.h qpnglineedit.h userinfo.h changepermision.h test.h mainwds.h mainwdsforonepage.h mainwdsfortwopage.h mainwdsforthreepage.h mainwdsforfivepage.h mainwdsforfourpage.h iconhelper.h myhelper.h frmmessagebox.h frmmain.h mainwindowsforall.h work.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp login.cpp registered.cpp getpasswd.cpp mainwindow.cpp changepasswd.cpp authentication.cpp registrationinfo.cpp getlog.cpp viewbatch.cpp setpermissions.cpp viewproline.cpp setproline.cpp modifyproline.cpp currentperson.cpp serverservice.cpp dbhelper.cpp qres.cpp quser.cpp utils.cpp product.cpp qbatch.cpp saveproduct.cpp loger.cpp maintaindata.cpp viewdata.cpp addbatch.cpp filedata.cpp qtray.cpp qpnglineedit.cpp userinfo.cpp changepermision.cpp test.cpp mainwds.cpp mainwdsforonepage.cpp mainwdsfortwopage.cpp mainwdsforthreepage.cpp mainwdsforfivepage.cpp mainwdsforfourpage.cpp iconhelper.cpp frmmessagebox.cpp frmmain.cpp mainwindowsforall.cpp work.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents login.ui registered.ui getpasswd.ui mainwindow.ui changepasswd.ui authentication.ui registrationinfo.ui getlog.ui viewbatch.ui setpermissions.ui viewproline.ui setproline.ui modifyproline.ui saveproduct.ui maintaindata.ui viewdata.ui addbatch.ui changepermision.ui test.ui mainwds.ui mainwdsforonepage.ui mainwdsfortwopage.ui mainwdsforthreepage.ui mainwdsforfivepage.ui mainwdsforfourpage.ui frmmessagebox.ui frmmain.ui mainwindowsforall.ui $(DISTDIR)/
+	$(COPY_FILE) --parents login.h registered.h getpasswd.h changepasswd.h authentication.h registrationinfo.h getlog.h viewbatch.h setpermissions.h viewproline.h setproline.h modifyproline.h session.h serverservice.h dbhelper.h qres.h quser.h product.h qbatch.h qtray.h saveproduct.h loger.h maintaindata.h viewdata.h addbatch.h filedata.h qpnglineedit.h userinfo.h changepermision.h test.h mainwds.h mainwdsforonepage.h mainwdsfortwopage.h mainwdsforthreepage.h mainwdsforfivepage.h mainwdsforfourpage.h iconhelper.h myhelper.h frmmessagebox.h frmmain.h mainwindowsforall.h work.h myproxystyle.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp login.cpp registered.cpp getpasswd.cpp changepasswd.cpp authentication.cpp registrationinfo.cpp getlog.cpp viewbatch.cpp setpermissions.cpp viewproline.cpp setproline.cpp modifyproline.cpp currentperson.cpp serverservice.cpp dbhelper.cpp qres.cpp quser.cpp product.cpp qbatch.cpp saveproduct.cpp loger.cpp maintaindata.cpp viewdata.cpp addbatch.cpp filedata.cpp qtray.cpp qpnglineedit.cpp userinfo.cpp changepermision.cpp test.cpp mainwds.cpp mainwdsforonepage.cpp mainwdsfortwopage.cpp mainwdsforthreepage.cpp mainwdsforfivepage.cpp mainwdsforfourpage.cpp iconhelper.cpp frmmessagebox.cpp frmmain.cpp mainwindowsforall.cpp work.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents login.ui registered.ui getpasswd.ui changepasswd.ui authentication.ui registrationinfo.ui getlog.ui viewbatch.ui setpermissions.ui viewproline.ui setproline.ui modifyproline.ui saveproduct.ui maintaindata.ui viewdata.ui addbatch.ui changepermision.ui test.ui mainwds.ui mainwdsforonepage.ui mainwdsfortwopage.ui mainwdsforthreepage.ui mainwdsforfivepage.ui mainwdsforfourpage.ui frmmessagebox.ui frmmain.ui mainwindowsforall.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -580,21 +571,18 @@ qrc_rc.cpp: rc.qrc \
 		image/qt_zh_CN.qm
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name rc rc.qrc -o qrc_rc.cpp
 
-compiler_moc_header_make_all: moc_login.cpp moc_registered.cpp moc_getpasswd.cpp moc_mainwindow.cpp moc_changepasswd.cpp moc_authentication.cpp moc_registrationinfo.cpp moc_getlog.cpp moc_viewbatch.cpp moc_setpermissions.cpp moc_viewproline.cpp moc_setproline.cpp moc_modifyproline.cpp moc_saveproduct.cpp moc_maintaindata.cpp moc_viewdata.cpp moc_addbatch.cpp moc_qpnglineedit.cpp moc_changepermision.cpp moc_test.cpp moc_mainwds.cpp moc_mainwdsforonepage.cpp moc_mainwdsfortwopage.cpp moc_mainwdsforthreepage.cpp moc_mainwdsforfivepage.cpp moc_mainwdsforfourpage.cpp moc_frmmessagebox.cpp moc_frmmain.cpp moc_mainwindowsforall.cpp moc_work.cpp
+compiler_moc_header_make_all: moc_login.cpp moc_registered.cpp moc_getpasswd.cpp moc_changepasswd.cpp moc_authentication.cpp moc_registrationinfo.cpp moc_getlog.cpp moc_viewbatch.cpp moc_setpermissions.cpp moc_viewproline.cpp moc_setproline.cpp moc_modifyproline.cpp moc_saveproduct.cpp moc_maintaindata.cpp moc_viewdata.cpp moc_addbatch.cpp moc_qpnglineedit.cpp moc_changepermision.cpp moc_test.cpp moc_mainwds.cpp moc_mainwdsforonepage.cpp moc_mainwdsfortwopage.cpp moc_mainwdsforthreepage.cpp moc_mainwdsforfivepage.cpp moc_mainwdsforfourpage.cpp moc_frmmessagebox.cpp moc_frmmain.cpp moc_mainwindowsforall.cpp moc_work.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_login.cpp moc_registered.cpp moc_getpasswd.cpp moc_mainwindow.cpp moc_changepasswd.cpp moc_authentication.cpp moc_registrationinfo.cpp moc_getlog.cpp moc_viewbatch.cpp moc_setpermissions.cpp moc_viewproline.cpp moc_setproline.cpp moc_modifyproline.cpp moc_saveproduct.cpp moc_maintaindata.cpp moc_viewdata.cpp moc_addbatch.cpp moc_qpnglineedit.cpp moc_changepermision.cpp moc_test.cpp moc_mainwds.cpp moc_mainwdsforonepage.cpp moc_mainwdsfortwopage.cpp moc_mainwdsforthreepage.cpp moc_mainwdsforfivepage.cpp moc_mainwdsforfourpage.cpp moc_frmmessagebox.cpp moc_frmmain.cpp moc_mainwindowsforall.cpp moc_work.cpp
+	-$(DEL_FILE) moc_login.cpp moc_registered.cpp moc_getpasswd.cpp moc_changepasswd.cpp moc_authentication.cpp moc_registrationinfo.cpp moc_getlog.cpp moc_viewbatch.cpp moc_setpermissions.cpp moc_viewproline.cpp moc_setproline.cpp moc_modifyproline.cpp moc_saveproduct.cpp moc_maintaindata.cpp moc_viewdata.cpp moc_addbatch.cpp moc_qpnglineedit.cpp moc_changepermision.cpp moc_test.cpp moc_mainwds.cpp moc_mainwdsforonepage.cpp moc_mainwdsfortwopage.cpp moc_mainwdsforthreepage.cpp moc_mainwdsforfivepage.cpp moc_mainwdsforfourpage.cpp moc_frmmessagebox.cpp moc_frmmain.cpp moc_mainwindowsforall.cpp moc_work.cpp
 moc_login.cpp: login.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include login.h -o moc_login.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include login.h -o moc_login.cpp
 
 moc_registered.cpp: login.h \
 		registered.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include registered.h -o moc_registered.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include registered.h -o moc_registered.cpp
 
 moc_getpasswd.cpp: getpasswd.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include getpasswd.h -o moc_getpasswd.cpp
-
-moc_mainwindow.cpp: mainwindow.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include getpasswd.h -o moc_getpasswd.cpp
 
 moc_changepasswd.cpp: dbhelper.h \
 		qres.h \
@@ -605,10 +593,10 @@ moc_changepasswd.cpp: dbhelper.h \
 		qbatch.h \
 		userinfo.h \
 		changepasswd.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include changepasswd.h -o moc_changepasswd.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include changepasswd.h -o moc_changepasswd.cpp
 
 moc_authentication.cpp: authentication.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include authentication.h -o moc_authentication.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include authentication.h -o moc_authentication.cpp
 
 moc_registrationinfo.cpp: dbhelper.h \
 		qres.h \
@@ -619,10 +607,10 @@ moc_registrationinfo.cpp: dbhelper.h \
 		qbatch.h \
 		userinfo.h \
 		registrationinfo.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include registrationinfo.h -o moc_registrationinfo.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include registrationinfo.h -o moc_registrationinfo.cpp
 
 moc_getlog.cpp: getlog.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include getlog.h -o moc_getlog.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include getlog.h -o moc_getlog.cpp
 
 moc_viewbatch.cpp: qbatch.h \
 		dbhelper.h \
@@ -633,7 +621,7 @@ moc_viewbatch.cpp: qbatch.h \
 		filedata.h \
 		userinfo.h \
 		viewbatch.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include viewbatch.h -o moc_viewbatch.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include viewbatch.h -o moc_viewbatch.cpp
 
 moc_setpermissions.cpp: changepermision.h \
 		dbhelper.h \
@@ -645,16 +633,16 @@ moc_setpermissions.cpp: changepermision.h \
 		qbatch.h \
 		userinfo.h \
 		setpermissions.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include setpermissions.h -o moc_setpermissions.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include setpermissions.h -o moc_setpermissions.cpp
 
 moc_viewproline.cpp: viewproline.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include viewproline.h -o moc_viewproline.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include viewproline.h -o moc_viewproline.cpp
 
 moc_setproline.cpp: setproline.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include setproline.h -o moc_setproline.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include setproline.h -o moc_setproline.cpp
 
 moc_modifyproline.cpp: modifyproline.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include modifyproline.h -o moc_modifyproline.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include modifyproline.h -o moc_modifyproline.cpp
 
 moc_saveproduct.cpp: product.h \
 		dbhelper.h \
@@ -666,7 +654,7 @@ moc_saveproduct.cpp: product.h \
 		userinfo.h \
 		session.h \
 		saveproduct.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include saveproduct.h -o moc_saveproduct.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include saveproduct.h -o moc_saveproduct.cpp
 
 moc_maintaindata.cpp: dbhelper.h \
 		qres.h \
@@ -679,7 +667,7 @@ moc_maintaindata.cpp: dbhelper.h \
 		saveproduct.h \
 		session.h \
 		maintaindata.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include maintaindata.h -o moc_maintaindata.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include maintaindata.h -o moc_maintaindata.cpp
 
 moc_viewdata.cpp: filedata.h \
 		dbhelper.h \
@@ -690,7 +678,7 @@ moc_viewdata.cpp: filedata.h \
 		qbatch.h \
 		userinfo.h \
 		viewdata.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include viewdata.h -o moc_viewdata.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include viewdata.h -o moc_viewdata.cpp
 
 moc_addbatch.cpp: dbhelper.h \
 		qres.h \
@@ -701,10 +689,10 @@ moc_addbatch.cpp: dbhelper.h \
 		qbatch.h \
 		userinfo.h \
 		addbatch.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include addbatch.h -o moc_addbatch.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include addbatch.h -o moc_addbatch.cpp
 
 moc_qpnglineedit.cpp: qpnglineedit.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include qpnglineedit.h -o moc_qpnglineedit.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include qpnglineedit.h -o moc_qpnglineedit.cpp
 
 moc_changepermision.cpp: dbhelper.h \
 		qres.h \
@@ -715,37 +703,37 @@ moc_changepermision.cpp: dbhelper.h \
 		qbatch.h \
 		userinfo.h \
 		changepermision.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include changepermision.h -o moc_changepermision.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include changepermision.h -o moc_changepermision.cpp
 
 moc_test.cpp: test.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include test.h -o moc_test.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include test.h -o moc_test.cpp
 
 moc_mainwds.cpp: mainwds.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwds.h -o moc_mainwds.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwds.h -o moc_mainwds.cpp
 
 moc_mainwdsforonepage.cpp: mainwdsforonepage.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwdsforonepage.h -o moc_mainwdsforonepage.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwdsforonepage.h -o moc_mainwdsforonepage.cpp
 
 moc_mainwdsfortwopage.cpp: mainwdsfortwopage.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwdsfortwopage.h -o moc_mainwdsfortwopage.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwdsfortwopage.h -o moc_mainwdsfortwopage.cpp
 
 moc_mainwdsforthreepage.cpp: mainwdsforthreepage.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwdsforthreepage.h -o moc_mainwdsforthreepage.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwdsforthreepage.h -o moc_mainwdsforthreepage.cpp
 
 moc_mainwdsforfivepage.cpp: mainwdsforfivepage.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwdsforfivepage.h -o moc_mainwdsforfivepage.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwdsforfivepage.h -o moc_mainwdsforfivepage.cpp
 
 moc_mainwdsforfourpage.cpp: mainwdsforfourpage.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwdsforfourpage.h -o moc_mainwdsforfourpage.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwdsforfourpage.h -o moc_mainwdsforfourpage.cpp
 
 moc_frmmessagebox.cpp: frmmessagebox.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include frmmessagebox.h -o moc_frmmessagebox.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include frmmessagebox.h -o moc_frmmessagebox.cpp
 
 moc_frmmain.cpp: frmmain.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include frmmain.h -o moc_frmmain.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include frmmain.h -o moc_frmmain.cpp
 
 moc_mainwindowsforall.cpp: mainwindowsforall.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindowsforall.h -o moc_mainwindowsforall.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindowsforall.h -o moc_mainwindowsforall.cpp
 
 moc_work.cpp: dbhelper.h \
 		qres.h \
@@ -756,13 +744,13 @@ moc_work.cpp: dbhelper.h \
 		qbatch.h \
 		userinfo.h \
 		work.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/QT/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include work.h -o moc_work.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/wenyun/桌面/batch_acquisition_system -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include work.h -o moc_work.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: UI/ui_login.h UI/ui_registered.h UI/ui_getpasswd.h UI/ui_mainwindow.h UI/ui_changepasswd.h UI/ui_authentication.h UI/ui_registrationinfo.h UI/ui_getlog.h UI/ui_viewbatch.h UI/ui_setpermissions.h UI/ui_viewproline.h UI/ui_setproline.h UI/ui_modifyproline.h UI/ui_saveproduct.h UI/ui_maintaindata.h UI/ui_viewdata.h UI/ui_addbatch.h UI/ui_changepermision.h UI/ui_test.h UI/ui_mainwds.h UI/ui_mainwdsforonepage.h UI/ui_mainwdsfortwopage.h UI/ui_mainwdsforthreepage.h UI/ui_mainwdsforfivepage.h UI/ui_mainwdsforfourpage.h UI/ui_frmmessagebox.h UI/ui_frmmain.h UI/ui_mainwindowsforall.h
+compiler_uic_make_all: UI/ui_login.h UI/ui_registered.h UI/ui_getpasswd.h UI/ui_changepasswd.h UI/ui_authentication.h UI/ui_registrationinfo.h UI/ui_getlog.h UI/ui_viewbatch.h UI/ui_setpermissions.h UI/ui_viewproline.h UI/ui_setproline.h UI/ui_modifyproline.h UI/ui_saveproduct.h UI/ui_maintaindata.h UI/ui_viewdata.h UI/ui_addbatch.h UI/ui_changepermision.h UI/ui_test.h UI/ui_mainwds.h UI/ui_mainwdsforonepage.h UI/ui_mainwdsfortwopage.h UI/ui_mainwdsforthreepage.h UI/ui_mainwdsforfivepage.h UI/ui_mainwdsforfourpage.h UI/ui_frmmessagebox.h UI/ui_frmmain.h UI/ui_mainwindowsforall.h
 compiler_uic_clean:
-	-$(DEL_FILE) UI/ui_login.h UI/ui_registered.h UI/ui_getpasswd.h UI/ui_mainwindow.h UI/ui_changepasswd.h UI/ui_authentication.h UI/ui_registrationinfo.h UI/ui_getlog.h UI/ui_viewbatch.h UI/ui_setpermissions.h UI/ui_viewproline.h UI/ui_setproline.h UI/ui_modifyproline.h UI/ui_saveproduct.h UI/ui_maintaindata.h UI/ui_viewdata.h UI/ui_addbatch.h UI/ui_changepermision.h UI/ui_test.h UI/ui_mainwds.h UI/ui_mainwdsforonepage.h UI/ui_mainwdsfortwopage.h UI/ui_mainwdsforthreepage.h UI/ui_mainwdsforfivepage.h UI/ui_mainwdsforfourpage.h UI/ui_frmmessagebox.h UI/ui_frmmain.h UI/ui_mainwindowsforall.h
+	-$(DEL_FILE) UI/ui_login.h UI/ui_registered.h UI/ui_getpasswd.h UI/ui_changepasswd.h UI/ui_authentication.h UI/ui_registrationinfo.h UI/ui_getlog.h UI/ui_viewbatch.h UI/ui_setpermissions.h UI/ui_viewproline.h UI/ui_setproline.h UI/ui_modifyproline.h UI/ui_saveproduct.h UI/ui_maintaindata.h UI/ui_viewdata.h UI/ui_addbatch.h UI/ui_changepermision.h UI/ui_test.h UI/ui_mainwds.h UI/ui_mainwdsforonepage.h UI/ui_mainwdsfortwopage.h UI/ui_mainwdsforthreepage.h UI/ui_mainwdsforfivepage.h UI/ui_mainwdsforfourpage.h UI/ui_frmmessagebox.h UI/ui_frmmain.h UI/ui_mainwindowsforall.h
 UI/ui_login.h: login.ui
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic login.ui -o UI/ui_login.h
 
@@ -771,9 +759,6 @@ UI/ui_registered.h: registered.ui
 
 UI/ui_getpasswd.h: getpasswd.ui
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic getpasswd.ui -o UI/ui_getpasswd.h
-
-UI/ui_mainwindow.h: mainwindow.ui
-	/usr/lib/x86_64-linux-gnu/qt5/bin/uic mainwindow.ui -o UI/ui_mainwindow.h
 
 UI/ui_changepasswd.h: changepasswd.ui
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic changepasswd.ui -o UI/ui_changepasswd.h
@@ -858,7 +843,6 @@ compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean
 ####### Compile
 
 main.o: main.cpp login.h \
-		mainwindow.h \
 		dbhelper.h \
 		qres.h \
 		qtray.h \
@@ -871,16 +855,15 @@ main.o: main.cpp login.h \
 		mainwdsforonepage.h \
 		myhelper.h \
 		frmmessagebox.h \
-		viewdata.h
+		viewdata.h \
+		myproxystyle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 login.o: login.cpp login.h \
 		UI/ui_login.h \
 		registered.h \
 		getpasswd.h \
-		mainwindow.h \
 		session.h \
-		utils.h \
 		dbhelper.h \
 		qres.h \
 		qtray.h \
@@ -914,33 +897,6 @@ getpasswd.o: getpasswd.cpp getpasswd.h \
 		UI/ui_getpasswd.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o getpasswd.o getpasswd.cpp
 
-mainwindow.o: mainwindow.cpp mainwindow.h \
-		UI/ui_mainwindow.h \
-		login.h \
-		authentication.h \
-		registrationinfo.h \
-		dbhelper.h \
-		qres.h \
-		qtray.h \
-		product.h \
-		quser.h \
-		filedata.h \
-		qbatch.h \
-		userinfo.h \
-		changepasswd.h \
-		getlog.h \
-		viewbatch.h \
-		maintaindata.h \
-		saveproduct.h \
-		session.h \
-		viewdata.h \
-		setpermissions.h \
-		changepermision.h \
-		viewproline.h \
-		setproline.h \
-		modifyproline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
-
 changepasswd.o: changepasswd.cpp changepasswd.h \
 		dbhelper.h \
 		qres.h \
@@ -952,7 +908,6 @@ changepasswd.o: changepasswd.cpp changepasswd.h \
 		userinfo.h \
 		UI/ui_changepasswd.h \
 		session.h \
-		utils.h \
 		qpnglineedit.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o changepasswd.o changepasswd.cpp
 
@@ -975,7 +930,8 @@ registrationinfo.o: registrationinfo.cpp registrationinfo.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o registrationinfo.o registrationinfo.cpp
 
 getlog.o: getlog.cpp getlog.h \
-		UI/ui_getlog.h
+		UI/ui_getlog.h \
+		loger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o getlog.o getlog.cpp
 
 viewbatch.o: viewbatch.cpp viewbatch.h \
@@ -1040,10 +996,6 @@ qres.o: qres.cpp qres.h
 
 quser.o: quser.cpp quser.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o quser.o quser.cpp
-
-utils.o: utils.cpp utils.h \
-		session.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o utils.o utils.cpp
 
 product.o: product.cpp product.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o product.o product.cpp
@@ -1280,9 +1232,6 @@ moc_registered.o: moc_registered.cpp
 
 moc_getpasswd.o: moc_getpasswd.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_getpasswd.o moc_getpasswd.cpp
-
-moc_mainwindow.o: moc_mainwindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
 moc_changepasswd.o: moc_changepasswd.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_changepasswd.o moc_changepasswd.cpp
