@@ -36,8 +36,6 @@ SOURCES += main.cpp \
     viewbatch.cpp \
     setpermissions.cpp \
     viewproline.cpp \
-    setproline.cpp \
-    modifyproline.cpp \
     currentperson.cpp \
     serverservice.cpp \
     dbhelper.cpp \
@@ -80,8 +78,6 @@ HEADERS  += \
     viewbatch.h \
     setpermissions.h \
     viewproline.h \
-    setproline.h \
-    modifyproline.h \
     session.h \
     serverservice.h \
     dbhelper.h \
@@ -126,8 +122,6 @@ FORMS    += \
     viewbatch.ui \
     setpermissions.ui \
     viewproline.ui \
-    setproline.ui \
-    modifyproline.ui \
     saveproduct.ui \
     maintaindata.ui \
     viewdata.ui \
