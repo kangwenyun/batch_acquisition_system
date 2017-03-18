@@ -131,3 +131,10 @@ void RegistrationInfo::on_edit_ok_button_clicked()
         ui->edit_ok_button->setText("编辑");
     }
 }
+
+void Login::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Return)
+        if("确定" == ui->edit_ok_button->text())
+            on_edit_ok_button_clicked();
+}

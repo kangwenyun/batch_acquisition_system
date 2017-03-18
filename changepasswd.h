@@ -4,6 +4,7 @@
 #include "dbhelper.h"
 #include <QWidget>
 #include <QString>
+#include <QKeyEvent>
 
 namespace Ui {
 class ChangePasswd;
@@ -18,8 +19,8 @@ public:
     ~ChangePasswd();
 
 private slots:
-
     void on_ok_button_clicked();
+    void keyPressEvent(QKeyEvent * event);
 
 private:
     Ui::ChangePasswd *ui;

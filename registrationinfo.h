@@ -4,6 +4,7 @@
 #include "dbhelper.h"
 #include "quser.h"
 #include <QWidget>
+#include <QKeyEvent>
 
 namespace Ui {
 class RegistrationInfo;
@@ -19,6 +20,7 @@ public:
 
 private slots:
     void on_edit_ok_button_clicked();
+    void keyPressEvent(QKeyEvent * event);
 
 private:
     Ui::RegistrationInfo *ui;

@@ -89,3 +89,9 @@ void Login::on_registered_clicked()
     //关闭登录界面
     this->close();
 }
+
+void Login::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Return)
+        on_login_clicked();
+}

@@ -54,6 +54,7 @@ void ViewBatch::on_refresh_batch_clicked()
         return;
     }
     i = 1;
+    ui->tableWidget->clearSpans();
     ui->tableWidget->setRowCount(l);
     //设置表格条目
     Qbatch batch;

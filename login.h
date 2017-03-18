@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QString>
+#include <QKeyEvent>
 
 class Registered;
 class GetPasswd;
@@ -25,6 +26,7 @@ private slots:
     void on_login_clicked();
     void on_get_passwd_clicked();
     void on_registered_clicked();
+    void keyPressEvent(QKeyEvent * event);
 
 private:
     Ui::Login *ui;
