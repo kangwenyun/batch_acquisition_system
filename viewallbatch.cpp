@@ -17,7 +17,8 @@
 #include <QList>
 #include <QStringList>
 #include <QModelIndex>
-#include<viewdatathread.h>
+#include <viewdatathread.h>
+#include <QGridLayout>
 //所有批次的信息的查看
 ViewAllBatch::ViewAllBatch(QWidget *parent) :
     QWidget(parent),
@@ -28,7 +29,8 @@ ViewAllBatch::ViewAllBatch(QWidget *parent) :
     // 自适应列宽度
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     on_refresh_batch_clicked();
-
+    ui->gridLayout->setRowStretch(0,1);
+    ui->gridLayout-> setRowStretch(1, 2);
 }
 
 ViewAllBatch::~ViewAllBatch()
