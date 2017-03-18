@@ -176,8 +176,10 @@ void MaintainData::onHeaderClicked(int col)
 void MaintainData::load(QList<Product> proList)
 {
     int l = proList.length();
+    qDebug()<<"l:"<<l;
     if( l == 0)
     {
+        qDebug()<<"12:";
         ui->tableWidget->setRowCount(1);
         ui->tableWidget->setSpan(0,0,1,6);
         ui->tableWidget->verticalHeader()->setVisible(false);
@@ -188,6 +190,7 @@ void MaintainData::load(QList<Product> proList)
         ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         return;
     }
+    ui->tableWidget->clearSpans();
     ui->tableWidget->setRowCount(l);
     int j = 0;//列计数
     for(int i = 0; i<l ;i++)//行
