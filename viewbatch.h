@@ -24,9 +24,8 @@ private slots:
 
 private:
     Ui::ViewBatch *ui;
-    //dbhelper helper;
     QList<Qbatch> batchList;
-
+    int i;//0代表没数据,1代表有数据
 };
 
 #endif // VIEWBATCH_H

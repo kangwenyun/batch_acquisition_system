@@ -42,6 +42,7 @@ void ViewBatch::on_refresh_batch_clicked()
     int l = batchList.length();
     if( l == 0)
     {
+        i = 0;
         ui->tableWidget->setRowCount(1);
         ui->tableWidget->setSpan(0,0,1,3);
         ui->tableWidget->verticalHeader()->setVisible(false);
@@ -52,6 +53,7 @@ void ViewBatch::on_refresh_batch_clicked()
         ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         return;
     }
+    i = 1;
     ui->tableWidget->setRowCount(l);
     //设置表格条目
     Qbatch batch;
@@ -85,6 +87,7 @@ void ViewBatch::on_tableWidget_clicked(const QModelIndex &index)
     //树顶:批次号
     QTreeWidgetItem *batchid = new QTreeWidgetItem(ui->treeWidget);
     QString txtbatch = ui->tableWidget->item(index.row(),0)->text();
+    if(i == 0) return;
     batchid->setText(0,txtbatch + " - 批次货物总数:" + ui->tableWidget->item(index.row(),1)->text()
                      + " ; 批次货物已有数: " + ui->tableWidget->item(index.row(),2)->text());//树形控件显示的文本信息
     batchid->setCheckState(0,Qt::Checked); //初始状态没有被选中
