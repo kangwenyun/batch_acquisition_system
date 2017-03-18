@@ -176,10 +176,8 @@ void MaintainData::onHeaderClicked(int col)
 void MaintainData::load(QList<Product> proList)
 {
     int l = proList.length();
-    qDebug()<<"l:"<<l;
     if( l == 0)
     {
-        qDebug()<<"12:";
         ui->tableWidget->setRowCount(1);
         ui->tableWidget->setSpan(0,0,1,6);
         ui->tableWidget->verticalHeader()->setVisible(false);
@@ -217,6 +215,8 @@ void MaintainData::load(QList<Product> proList)
         flag->setTextAlignment(Qt::AlignCenter);
         ui->tableWidget->setItem(i,j++,flag);
     }
+    ui->tableWidget->selectRow(0);
+    ui->tableWidget->setFocus(Qt::MouseFocusReason);
 }
 
 void MaintainData::on_dateEdit_userDateChanged(const QDate &date)

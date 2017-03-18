@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     myHelper::SetStyle("gray");//灰色风格
 //    myHelper::SetStyle("navy");//天蓝色风格
     myHelper::SetChinese();
-    dbhelper::getInstance();
+    /*dbhelper *db = */dbhelper::getInstance();
 //    db->initdb();
     Login l;
     l.show();

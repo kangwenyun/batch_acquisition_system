@@ -1418,6 +1418,12 @@ Qres dbhelper::QcheckPermisson(QString userid)
                 _return.msg="you have enough permisson to operate";
                 _return.error=0;
             }
+            else
+            {
+                _return.success=0;
+                _return.msg="you not have enough permisson to operate";
+                _return.error=0;
+            }
         }
         else
         {

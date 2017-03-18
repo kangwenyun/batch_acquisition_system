@@ -66,7 +66,8 @@ SOURCES += main.cpp \
     frmmessagebox.cpp \
     frmmain.cpp \
     mainwindowsforall.cpp \
-    work.cpp
+    work.cpp \
+    viewallbatch.cpp
 
 HEADERS  += \
     login.h \
@@ -111,7 +112,8 @@ HEADERS  += \
     frmmain.h \
     mainwindowsforall.h \
     work.h \
-    myproxystyle.h
+    myproxystyle.h \
+    viewallbatch.h
 
 FORMS    += \
     login.ui \
@@ -140,7 +142,8 @@ FORMS    += \
     mainwdsforfourpage.ui \
     frmmessagebox.ui \
     frmmain.ui \
-    mainwindowsforall.ui
+    mainwindowsforall.ui \
+    viewallbatch.ui
 
 RESOURCES += \
     icons.qrc \

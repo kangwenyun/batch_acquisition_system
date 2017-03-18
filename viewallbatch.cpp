@@ -1,5 +1,5 @@
-#include "viewbatch.h"
-#include "ui_viewbatch.h"
+#include "viewallbatch.h"
+#include "ui_viewallbatch.h"
 #include "qres.h"
 #include "addbatch.h"
 #include "dbhelper.h"
@@ -19,9 +19,9 @@
 #include <QModelIndex>
 #include<viewdatathread.h>
 //所有批次的信息的查看
-ViewBatch::ViewBatch(QWidget *parent) :
+ViewAllBatch::ViewAllBatch(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ViewBatch)
+    ui(new Ui::ViewAllBatch)
 {
     ui->setupUi(this);
     ui->treeWidget->setColumnCount(1);
@@ -31,14 +31,14 @@ ViewBatch::ViewBatch(QWidget *parent) :
 
 }
 
-ViewBatch::~ViewBatch()
+ViewAllBatch::~ViewAllBatch()
 {
     delete ui;
 }
 
-void ViewBatch::on_refresh_batch_clicked()
+void ViewAllBatch::on_refresh_batch_clicked()
 {
-    batchList = dbhelper::getInstance()->QgetBatch();
+    batchList = dbhelper::getInstance()->QgetallBatch();
     int l = batchList.length();
     if( l == 0)
     {
@@ -46,7 +46,7 @@ void ViewBatch::on_refresh_batch_clicked()
         ui->tableWidget->setRowCount(1);
         ui->tableWidget->setSpan(0,0,1,3);
         ui->tableWidget->verticalHeader()->setVisible(false);
-        QTableWidgetItem *item = new QTableWidgetItem("还没有接受任何批次哦~~~");
+        QTableWidgetItem *item = new QTableWidgetItem("还没有任何批次哦~~~");
         item->setTextAlignment(Qt::AlignCenter);
         ui->tableWidget->setItem(0,0,item);
         ui->tableWidget->setShowGrid(false);//隐藏表格线
@@ -70,11 +70,9 @@ void ViewBatch::on_refresh_batch_clicked()
         batchamout->setTextAlignment(Qt::AlignCenter);
         ui->tableWidget->setItem(i,2,batchamout);
     }
-    ui->tableWidget->selectRow(0);
-    ui->tableWidget->setFocus(Qt::MouseFocusReason);
 }
 
-void ViewBatch::on_add_batch_clicked()
+void ViewAllBatch::on_add_batch_clicked()
 {
     addBatch adb;
     if(adb.exec() == QDialog::Accepted)
@@ -83,7 +81,7 @@ void ViewBatch::on_add_batch_clicked()
     }
 }
 
-void ViewBatch::on_tableWidget_clicked(const QModelIndex &index)
+void ViewAllBatch::on_tableWidget_clicked(const QModelIndex &index)
 {
     ui->treeWidget->clear();
     //树顶:批次号
