@@ -8,6 +8,7 @@ public:
     QString batchid;
     QString batchsum;
     QString batchamout;
+    QString status;
 };
 
 #endif // QBATCH_H

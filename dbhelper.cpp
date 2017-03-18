@@ -12,13 +12,13 @@ dbhelper::dbhelper()
     QcreateProductTable();
     QcreateUserTable();
     QcreateBatchTable();
-      qDebug()<<"db";
+    qDebug()<<"db";
 }
 
 dbhelper *dbhelper::getInstance()
 {
-static dbhelper * cdb=new dbhelper();
- return cdb;
+    static dbhelper * cdb=new dbhelper();
+    return cdb;
 }
 
 void dbhelper::QcreateBatchTable()
@@ -32,7 +32,8 @@ void dbhelper::QcreateBatchTable()
                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                    "batchid VARCHAR ,"
                    "batchsum VARCHAR,"
-                   "batchamout VARCHAR)");
+                   "batchamout VARCHAR,"
+                   "status VARCHAR)");
     }
 
 }
@@ -384,17 +385,17 @@ Qres dbhelper::QdeleteData( QString userid,  Product deleteproduct)
                 _return.msg="删除货物成功,货物序号:"+deleteproduct.number+" 货物托盘号:"+deleteproduct.tray+" 货物批次号:"+deleteproduct.batchid;
                 _return.success=1;
                 //then refresh batch
-               Qres res=reduceBatch(deleteproduct.batchid);
-               if(res.success=1)
-               {
-                Loger::getInstance()->setLoger(userid,_return.msg);
-                return _return;
-               }
-               else
-               {
-                   Loger::getInstance()->setLoger(userid,res.msg);
-                   return res;
-               }
+                Qres res=reduceBatch(deleteproduct.batchid);
+                if(res.success=1)
+                {
+                    Loger::getInstance()->setLoger(userid,_return.msg);
+                    return _return;
+                }
+                else
+                {
+                    Loger::getInstance()->setLoger(userid,res.msg);
+                    return res;
+                }
             }
             else
             {
@@ -606,14 +607,15 @@ Qres dbhelper::QaddBatch(QString userid,QString batchid,QString batchsum)
             {
                 if(numberquery.next())
                 {
-                number=numberquery.value(0).toString();
+                    number=numberquery.value(0).toString();
                 }
             }
             QSqlQuery query;
-            query.prepare("insert into Batch  (batchid,batchsum,batchamout)  values ( :batchid,:batchsum,:batchamout)");
+            query.prepare("insert into Batch  (batchid,batchsum,batchamout,status)  values ( :batchid,:batchsum,:batchamout,:status)");
             query.bindValue(":batchid",batchid);
             query.bindValue(":batchsum",batchsum);
             query.bindValue(":batchamout",number);
+            query.bindValue(":status","unaccept");
             if(query.exec())
             {
                 _return.error=0;
@@ -1084,7 +1086,8 @@ QList<Qbatch> dbhelper::QgetBatch()
 {
     QSqlQuery query;
     QList<Qbatch> list;
-    query.prepare("select * from Batch");
+    query.prepare("select * from Batch where status=? ");
+    query.addBindValue("accept");
     if(query.exec())
     {
         while(query.next())
@@ -1092,10 +1095,12 @@ QList<Qbatch> dbhelper::QgetBatch()
             QString batchid=query.value("batchid").toString();
             QString batchsum=query.value("batchsum").toString();
             QString batchamout=query.value("batchamout").toString();
+            QString status=query.value("status").toString();
             Qbatch batch;
             batch.batchamout=batchamout;
             batch.batchid=batchid;
             batch.batchsum=batchsum;
+            batch.status=status;
             list.append(batch);
         }
         return list;
@@ -1103,6 +1108,121 @@ QList<Qbatch> dbhelper::QgetBatch()
     else
     {
         return list;
+    }
+}
+
+Qres dbhelper::QtoacceptBatch(QString userid,QString batchid)
+{
+    Qres _return;
+    //判断是否有权限去操作
+    QSqlQuery query;
+    query.prepare("select level from User where userid =?");
+    query.addBindValue(userid);
+    if(query.exec())
+    {
+        if(query.next())
+        {
+            if(query.value(0).toString()=="0")
+            {
+                QSqlQuery updatequery;
+                updatequery.prepare("update Batch set status = ? where batchid = ?");
+                updatequery.addBindValue("accept");
+                updatequery.addBindValue(batchid);
+                if(updatequery.exec())
+                {
+                    _return.error=0;
+                    _return.msg="accept the batch "+batchid;
+                    _return.success=1;
+                }
+                else
+                {
+                    //database error
+                    _return.error=1;
+                    _return.msg="when accept the batch  happen error";
+                    _return.success=0;
+                }
+            }
+            else
+            {
+                //quan xian bu gou
+                _return.error=0;
+                _return.msg="not permission";
+                _return.success=0;
+            }
+        }
+    }
+    return _return;
+}
+
+Qres dbhelper::QtocheckBatch(QString userid, QString batchid)
+{
+    Qres _return;
+    //判断是否有权限去操作
+    QSqlQuery query;
+    query.prepare("select level from User where userid =?");
+    query.addBindValue(userid);
+    if(query.exec())
+    {
+        if(query.next())
+        {
+            if(query.value(0).toString()=="0")
+            {
+                QSqlQuery updatequery;
+                updatequery.prepare("update Batch set status = ? where batchid = ?");
+                updatequery.addBindValue("check");
+                updatequery.addBindValue(batchid);
+                if(updatequery.exec())
+                {
+                    _return.error=0;
+                    _return.msg="submit the batch "+batchid;
+                    _return.success=1;
+                }
+                else
+                {
+                    //database error
+                    _return.error=1;
+                    _return.msg="when accept the batch  happen error";
+                    _return.success=0;
+                }
+            }
+            else
+            {
+                //quan xian bu gou
+                _return.error=0;
+                _return.msg="not permission";
+                _return.success=0;
+            }
+        }
+    }
+    return _return;
+}
+
+int  dbhelper::Qjudgestatus(QString batch)
+{
+    QSqlQuery query;
+    query.prepare("select status from batch where batchid =?");
+    query.addBindValue(batch);
+    if(query.exec())
+    {
+        if(query.next())
+        {
+            if( query.value(0).toString()=="accept")
+            {
+                return 2;
+            }
+            else if(query.value(0).toString()=="unaccept")
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            return 0;
+        }
     }
 }
 
@@ -1147,10 +1267,10 @@ QList<Product> dbhelper::QgetDataorderby(int attr,int pattern)
     return list;
 }
 
-  Qres dbhelper::QgetPerson(QList<UserInfo>& list,QString userid)
+Qres dbhelper::QgetPerson(QList<UserInfo>& list,QString userid)
 {
     QSqlQuery query;
-   Qres _return;
+    Qres _return;
     query.prepare("select * from user where userid = ?");
     query.addBindValue(userid);
     if(query.exec())
@@ -1159,17 +1279,17 @@ QList<Product> dbhelper::QgetDataorderby(int attr,int pattern)
         {
             if(query.value("level").toString()=="0")
             {
-              //permission
+                //permission
                 QSqlQuery personquery;
                 if(personquery.exec("select * from user"))
                 {
                     while (personquery.next())
                     {
                         UserInfo temp;
-                       temp.userid=personquery.value("userid").toString();
-                       temp.username=personquery.value("username").toString();
-                       temp.level=personquery.value("level").toString();
-                       list.append(temp);
+                        temp.userid=personquery.value("userid").toString();
+                        temp.username=personquery.value("username").toString();
+                        temp.level=personquery.value("level").toString();
+                        list.append(temp);
                     }
                     _return.error=0;
                     _return.msg="get person success";
@@ -1177,7 +1297,7 @@ QList<Product> dbhelper::QgetDataorderby(int attr,int pattern)
                 }
                 else
                 {
-               //no user
+                    //no user
                     _return.error=0;
                     _return.msg="no this user";
                     _return.success=0;
@@ -1203,55 +1323,116 @@ QList<Product> dbhelper::QgetDataorderby(int attr,int pattern)
     return _return;
 }
 
- Qres dbhelper::QsetPermission(QString masteruserid,QString workeruserid,QString setlevel)
- {
-     QSqlQuery query;
+Qres dbhelper::QsetPermission(QString masteruserid,QString workeruserid,QString setlevel)
+{
+    QSqlQuery query;
     Qres _return;
-     query.prepare("select * from user where userid = ?");
-     query.addBindValue(masteruserid);
-     if(query.exec())
-     {
-         if(query.next())
-         {
-             if(query.value("level").toString()=="0")
-             {
-               //permission
-                 QSqlQuery updatequery;
-                 updatequery.prepare("update User set level = ? where userid = ?");
-                 updatequery.addBindValue(setlevel);
-                 updatequery.addBindValue(workeruserid);
-                 if(updatequery.exec())
-                 {
-                 _return.error=0;
-                 _return.msg="update"+workeruserid+"  level to "+setlevel+" success";
-                 _return.success=1;
-                   Loger::getInstance()->setLoger(masteruserid,_return.msg);
-                 }
-                 else
-                 {
-                     _return.error=1;
-                     _return.msg="update level happens data base error";
-                     _return.success=0;
-                       Loger::getInstance()->setLoger(masteruserid,_return.msg);
-                 }
-             }
-         }
-         else
-         {
-             //not exist
-             _return.error=0;
-             _return.msg="not exist the user";
-             _return.success=0;
-             Loger::getInstance()->setLoger(masteruserid,_return.msg);
-         }
-     }
-     else
-     {
-         //db error
-         _return.error=1;
-         _return.msg="update level happens data base error";
-         _return.success=0;
-           Loger::getInstance()->setLoger(masteruserid,_return.msg);
-     }
-     return _return;
- }
+    query.prepare("select * from user where userid = ?");
+    query.addBindValue(masteruserid);
+    if(query.exec())
+    {
+        if(query.next())
+        {
+            if(query.value("level").toString()=="0")
+            {
+                //permission
+                QSqlQuery updatequery;
+                updatequery.prepare("update User set level = ? where userid = ?");
+                updatequery.addBindValue(setlevel);
+                updatequery.addBindValue(workeruserid);
+                if(updatequery.exec())
+                {
+                    _return.error=0;
+                    _return.msg="update"+workeruserid+"  level to "+setlevel+" success";
+                    _return.success=1;
+                    Loger::getInstance()->setLoger(masteruserid,_return.msg);
+                }
+                else
+                {
+                    _return.error=1;
+                    _return.msg="update level happens data base error";
+                    _return.success=0;
+                    Loger::getInstance()->setLoger(masteruserid,_return.msg);
+                }
+            }
+        }
+        else
+        {
+            //not exist
+            _return.error=0;
+            _return.msg="not exist the user";
+            _return.success=0;
+            Loger::getInstance()->setLoger(masteruserid,_return.msg);
+        }
+    }
+    else
+    {
+        //db error
+        _return.error=1;
+        _return.msg="update level happens data base error";
+        _return.success=0;
+        Loger::getInstance()->setLoger(masteruserid,_return.msg);
+    }
+    return _return;
+}
+QList<Qbatch> dbhelper::QgetallBatch()
+{
+    QSqlQuery query;
+    QList<Qbatch> list;
+    query.prepare("select * from Batch");
+    if(query.exec())
+    {
+        while(query.next())
+        {
+            QString batchid=query.value("batchid").toString();
+            QString batchsum=query.value("batchsum").toString();
+            QString batchamout=query.value("batchamout").toString();
+            QString status=query.value("status").toString();
+            Qbatch batch;
+            batch.batchamout=batchamout;
+            batch.batchid=batchid;
+            batch.batchsum=batchsum;
+            batch.status=status;
+            list.append(batch);
+        }
+        return list;
+    }
+    else
+    {
+        return list;
+    }
+}
+Qres dbhelper::QcheckPermisson(QString userid)
+{
+    Qres _return;
+    QSqlQuery query;
+    query.prepare("select level from user where userid =?");
+    query.addBindValue(userid);
+    if(query.exec())
+    {
+        if(query.next())
+        {
+            if( query.value(0).toString()=="0")
+            {
+                _return.success=1;
+                _return.msg="you have enough permisson to operate";
+                _return.error=0;
+            }
+        }
+        else
+        {
+            _return.success=0;
+            _return.msg="error";
+            _return.error=0;
+        }
+    }
+    else
+    {
+        _return.success=0;
+        _return.msg="database error";
+        _return.error=1;
+    }
+    return _return;
+}
+
+

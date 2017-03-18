@@ -46,10 +46,15 @@ public:
     Qres QaddBatch(QString userid,QString batchid,QString batchsum);
     Qres QgetBatchDetialThroughBatchid(QList<Qtray>& list,QString batchid);
     QList<Qbatch> QgetBatch();
+    QList<Qbatch> QgetallBatch();
+    Qres QtoacceptBatch(QString userid,QString batchid);
+    Qres QtocheckBatch(QString userid,QString batchid);
+    int  Qjudgestatus(QString batch);
     //about refreshdata
     Qres QexistOrInsert(Product product);
     Qres Qrefreshfile();
     //permission
+    Qres QcheckPermisson(QString userid);
     Qres QgetPerson(QList<UserInfo>& list,QString userid);
     Qres QsetPermission(QString masteruserid,QString workeruserid,QString setlevel);
 private:

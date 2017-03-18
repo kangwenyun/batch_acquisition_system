@@ -11,6 +11,7 @@ public:
     explicit work(QObject *parent = 0);
     void run();
     void refresh();
+    void test();
 private:
     FileData all;
 

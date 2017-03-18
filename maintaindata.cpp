@@ -185,6 +185,7 @@ void MaintainData::load(QList<Product> proList)
         item->setTextAlignment(Qt::AlignCenter);
         ui->tableWidget->setItem(0,0,item);
         ui->tableWidget->setShowGrid(false);//隐藏表格线
+        ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         return;
     }
     ui->tableWidget->setRowCount(l);
