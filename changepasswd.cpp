@@ -77,7 +77,7 @@ void ChangePasswd::on_ok_button_clicked()
     }
 }
 
-void Login::keyPressEvent(QKeyEvent *event)
+void ChangePasswd::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Return)
         on_ok_button_clicked();

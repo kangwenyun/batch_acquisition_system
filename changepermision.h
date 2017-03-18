@@ -5,6 +5,7 @@
 #include "userinfo.h"
 #include <QDialog>
 #include <QString>
+#include <QKeyEvent>
 
 namespace Ui {
 class changePermision;
@@ -23,6 +24,8 @@ private slots:
     void on_buttonBox_accepted();
 
     virtual void accept();
+
+    void keyPressEvent(QKeyEvent * event);
 
 private:
     Ui::changePermision *ui;

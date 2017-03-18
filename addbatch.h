@@ -1,6 +1,5 @@
 #ifndef ADDBATCH_H
 #define ADDBATCH_H
-
 #include "dbhelper.h"
 #include <QDialog>
 #include <QString>

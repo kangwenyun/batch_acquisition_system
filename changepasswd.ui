@@ -58,10 +58,13 @@
      <x>75</x>
      <y>48</y>
      <width>271</width>
-     <height>136</height>
+     <height>140</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <property name="bottomMargin">
+     <number>5</number>
+    </property>
     <item>
      <widget class="QLineEdit" name="userId_edit">
       <property name="font">

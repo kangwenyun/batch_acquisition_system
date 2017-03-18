@@ -74,14 +74,14 @@ void ViewAllBatch::on_refresh_batch_clicked()
     }
 }
 
-void ViewAllBatch::on_add_batch_clicked()
-{
-    addBatch adb;
-    if(adb.exec() == QDialog::Accepted)
-    {
-        on_refresh_batch_clicked();
-    }
-}
+//void ViewAllBatch::on_add_batch_clicked()
+//{
+//    addBatch adb;
+//    if(adb.exec() == QDialog::Accepted)
+//    {
+//        on_refresh_batch_clicked();
+//    }
+//}
 
 void ViewAllBatch::on_tableWidget_clicked(const QModelIndex &index)
 {

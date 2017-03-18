@@ -132,7 +132,7 @@ void RegistrationInfo::on_edit_ok_button_clicked()
     }
 }
 
-void Login::keyPressEvent(QKeyEvent *event)
+void RegistrationInfo::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Return)
         if("确定" == ui->edit_ok_button->text())

@@ -46,8 +46,11 @@ void addBatch::accept()
     //判断是否有未填项
     for(int i = 0; i < 2 ; i++)
     {
+        qDebug()<<"34:"<<i;
+        qDebug()<<ui->tableWidget->item(0,i)->text();
         if(ui->tableWidget->item(0,i)->text() == NULL)
         {
+            qDebug()<<"12:";
             j = QMessageBox::warning(this,tr("warning"),tr("请填满所有项!"));
             break;
         }
@@ -60,4 +63,3 @@ void addBatch::accept()
         acc = false;
     }
 }
-

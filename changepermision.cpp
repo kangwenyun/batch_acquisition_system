@@ -65,3 +65,10 @@ void changePermision::accept()
         acc = false;
     }
 }
+
+void changePermision::keyPressEvent(QKeyEvent *event)
+{
+    accept();
+    if (event->key() == Qt::Key_Return)
+        on_buttonBox_accepted();
+}

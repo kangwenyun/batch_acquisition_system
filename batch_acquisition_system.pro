@@ -36,7 +36,6 @@ SOURCES += main.cpp \
     viewbatch.cpp \
     setpermissions.cpp \
     viewproline.cpp \
-    currentperson.cpp \
     serverservice.cpp \
     dbhelper.cpp \
     qres.cpp \
@@ -65,7 +64,8 @@ SOURCES += main.cpp \
     frmmain.cpp \
     mainwindowsforall.cpp \
     work.cpp \
-    viewallbatch.cpp
+    viewallbatch.cpp \
+    session.cpp
 
 HEADERS  += \
     login.h \

@@ -114,4 +114,3 @@ void saveProduct::accept()
         acc = false;
     }
 }
-
