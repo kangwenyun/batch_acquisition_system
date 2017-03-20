@@ -46,6 +46,8 @@ public:
     Qres QaddBatch(QString userid,QString batchid,QString batchsum);
     Qres QgetBatchDetialThroughBatchid(QList<Qtray>& list,QString batchid);
     QList<Qbatch> QgetBatch();
+    QList<Qbatch> QgetcheckBatch();
+    QList<Qbatch> QgetfinishBatch();
     QList<Qbatch> QgetallBatch();
     Qres QtoacceptBatch(QString userid,QString batchid);
     Qres QtocheckBatch(QString userid,QString batchid);

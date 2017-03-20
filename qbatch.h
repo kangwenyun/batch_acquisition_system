@@ -1,6 +1,6 @@
 #ifndef QBATCH_H
 #define QBATCH_H
-#include<QString>
+#include <QString>
 class Qbatch
 {
 public:

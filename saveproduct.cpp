@@ -10,7 +10,7 @@ saveProduct::saveProduct(QWidget *parent) :
 {
     ui->setupUi(this);
     // 自适应列宽度
-    ui->tableWidget->setColumnWidth(4,200);
+    ui->tableWidget->setColumnWidth(5,200);
     ui->tableWidget->setRowCount(1);
     Session *curper = Session::getInstance();
     userId = curper->getUserId();
@@ -22,6 +22,27 @@ saveProduct::saveProduct(QWidget *parent) :
     dateTimeEdit->setMinimumDateTime(dt);
     dateTimeEdit->setMaximumDateTime(QDateTime::currentDateTime());
     acc = true;
+
+    //id,批次号,托盘号,货物号,货物类型,备注
+    id = new QTableWidgetItem("1");
+    id->setTextAlignment(Qt::AlignCenter);
+    id->setFlags(Qt::NoItemFlags);
+    ui->tableWidget->setItem(0,0,id);
+    batchid = new QTableWidgetItem("1");
+    batchid->setTextAlignment(Qt::AlignCenter);
+    ui->tableWidget->setItem(0,1,batchid);
+    tray = new QTableWidgetItem("1");
+    tray->setTextAlignment(Qt::AlignCenter);
+    ui->tableWidget->setItem(0,2,tray);
+    number = new QTableWidgetItem("1");
+    number->setTextAlignment(Qt::AlignCenter);
+    ui->tableWidget->setItem(0,3,number);
+    type = new QTableWidgetItem("1");
+    type->setTextAlignment(Qt::AlignCenter);
+    ui->tableWidget->setItem(0,4,type);
+    flag = new QTableWidgetItem("1");
+    flag->setTextAlignment(Qt::AlignCenter);
+    ui->tableWidget->setItem(0,6,flag);
 }
 
 saveProduct::~saveProduct()
@@ -36,19 +57,12 @@ void saveProduct::setProduct(Product curproduct)
     {
         change = true;
         this->curproduct = curproduct;
-        //批次号,托盘号,货物号,货物类型,备注
-        QTableWidgetItem *batchid = new QTableWidgetItem(curproduct.batchid);
-        batchid->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(0,0,batchid);
-        QTableWidgetItem *tray = new QTableWidgetItem(curproduct.tray);
-        tray->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(0,1,tray);
-        QTableWidgetItem *number = new QTableWidgetItem(curproduct.number);
-        number->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(0,2,number);
-        QTableWidgetItem *type = new QTableWidgetItem(curproduct.type);
-        type->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(0,3,type);
+        id->setText(QObject::tr("%1").arg(curproduct.id));
+        batchid->setText(curproduct.batchid);
+        tray->setText(curproduct.tray);
+        number->setText(curproduct.number);
+        type->setText(curproduct.type);
+        flag->setText(QObject::tr("%1").arg(curproduct.flag));
         QString dateTime = curproduct.time;
         bool ok;
         QDate d(dateTime.mid(0, 4).toInt(&ok,10),dateTime.mid(5, 2).toInt(&ok,10),dateTime.mid(8, 2).toInt(&ok,10));
@@ -56,15 +70,20 @@ void saveProduct::setProduct(Product curproduct)
         QDateTime dt(d,t);
         dateTimeEdit->setDateTime(dt);
         dateTimeEdit->setDisplayFormat("yyyy-MM-dd hh:mm:ss");
-        ui->tableWidget->setCellWidget(0,4,dateTimeEdit);
-        QTableWidgetItem *flag = new QTableWidgetItem(QObject::tr("%1").arg(curproduct.flag));
-        flag->setTextAlignment(Qt::AlignCenter);
-        ui->tableWidget->setItem(0,5,flag);
+        ui->tableWidget->setCellWidget(0,5,dateTimeEdit);
+
     }else{
         change = false;
+        //隐藏第一列
+        ui->tableWidget->hideColumn(0);
+        batchid->setText("");
+        tray->setText("");
+        number->setText("");
+        type->setText("");
         dateTimeEdit->setDateTime(QDateTime::currentDateTime());
         dateTimeEdit->setDisplayFormat("yyyy-MM-dd hh:mm:ss");
-        ui->tableWidget->setCellWidget(0,4,dateTimeEdit);
+        ui->tableWidget->setCellWidget(0,5,dateTimeEdit);
+        flag->setText("");
     }
 }
 
@@ -74,12 +93,14 @@ void saveProduct::on_buttonBox_accepted()
     {
         Product pro;
         bool ok;
-        pro.batchid = ui->tableWidget->item(0,0)->text();
-        pro.tray = ui->tableWidget->item(0,1)->text();
-        pro.number = ui->tableWidget->item(0,2)->text();
-        pro.type = ui->tableWidget->item(0,3)->text();
+        if(change)
+            pro.id = ui->tableWidget->item(0,0)->text().toInt(&ok,10);
+        pro.batchid = ui->tableWidget->item(0,1)->text();
+        pro.tray = ui->tableWidget->item(0,2)->text();
+        pro.number = ui->tableWidget->item(0,3)->text();
+        pro.type = ui->tableWidget->item(0,4)->text();
         pro.time = dateTimeEdit->dateTime().toString("yyyy-MM-dd hh:mm:ss");
-        pro.flag = ui->tableWidget->item(0,5)->text().toInt(&ok,10);
+        pro.flag = ui->tableWidget->item(0,6)->text().toInt(&ok,10);
         Qres qres;
         if(change)
         {
@@ -98,12 +119,24 @@ void saveProduct::accept()
 {
     int j = 0;//没有未填项
     //判断是否有未填项
-    for(int i = 0; i < 4 ; i++)
+    if(change)
     {
-        if(ui->tableWidget->item(0,i)->text() == NULL || ui->tableWidget->item(0,5)->text() == NULL )
+        for(int i = 1; i < 5 ; i++)
         {
-            j = QMessageBox::warning(this,tr("warning"),tr("请填满所有项!"));
-            break;
+            if(ui->tableWidget->item(0,i)->text() == NULL || ui->tableWidget->item(0,6)->text() == NULL )
+            {
+                j = QMessageBox::warning(this,tr("warning"),tr("请填满所有项!"));
+                break;
+            }
+        }
+    }else{
+        for(int i = 1; i < 5 ; i++)
+        {
+            if(ui->tableWidget->item(0,i)->text() == NULL || ui->tableWidget->item(0,6)->text() == NULL )
+            {
+                j = QMessageBox::warning(this,tr("warning"),tr("请填满所有项!"));
+                break;
+            }
         }
     }
     if( j == 0)

@@ -6,6 +6,7 @@
         <file>images/2.png</file>
         <file>images/4.png</file>
         <file>images/11.jpg</file>
+<<<<<<< HEAD
         <file>images/age.png</file>
         <file>images/job.png</file>
         <file>images/level.png</file>
@@ -16,5 +17,8 @@
         <file>images/woman.png</file>
         <file>images/key.png</file>
         <file>images/userid.png</file>
+=======
+        <file>images/find.png</file>
+>>>>>>> 7539e36e716bad486c3330225b1f6c296b5b6cf6
     </qresource>
 </RCC>

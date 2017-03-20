@@ -27,7 +27,7 @@ Login::Login(QWidget *parent) :
     ui->userId->setFixedHeight(30);
     ui->passwd->setFixedHeight(30);
     //将焦点设置到用户名输入框上
-    ui->userId->installEventFilter(this);
+    ui->userId->setFocus();
 }
 
 Login::~Login()
