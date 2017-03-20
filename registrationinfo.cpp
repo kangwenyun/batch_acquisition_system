@@ -20,10 +20,10 @@ RegistrationInfo::RegistrationInfo(QWidget *parent) :
 {
     ui->setupUi(this);
     new QPngLineEdit("", ui->userid_edit,"userid.png",0);
-    new QPngLineEdit("", ui->username_edit,"name.jpg",0);
-    new QPngLineEdit("", ui->age_edit,"age.jpg",0);
-    new QPngLineEdit("", ui->job_edit,"job.jpg",0);
-    new QPngLineEdit("", ui->level_edit,"level.jpg",0);
+    new QPngLineEdit("", ui->username_edit,"name.png",0);
+    new QPngLineEdit("", ui->age_edit,"age.png",0);
+    new QPngLineEdit("", ui->job_edit,"job.png",0);
+    new QPngLineEdit("", ui->level_edit,"level.png",0);
     //获取并设置当前用户信息
     Session* curper = Session::getInstance();
     userId = curper->getUserId();
@@ -38,10 +38,10 @@ RegistrationInfo::RegistrationInfo(QWidget *parent) :
         ui->username_edit->setText(newUser.username);
         if(newUser.sex == "0")
         {
-            new QPngLineEdit("", ui->sex_edit,"man.jpg",0);
+            new QPngLineEdit("", ui->sex_edit,"man.png",0);
             ui->sex_edit->setText("♂");
         }else{
-            new QPngLineEdit("", ui->sex_edit,"woman.jpg",0);
+            new QPngLineEdit("", ui->sex_edit,"woman.png",0);
             ui->sex_edit->setText("♀");
         }
         ui->age_edit->setText(newUser.age);

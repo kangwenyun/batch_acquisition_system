@@ -14,9 +14,9 @@ ChangePasswd::ChangePasswd(QWidget *parent) :
 {
     ui->setupUi(this);
     new QPngLineEdit("", ui->userId_edit,"userid.png",1);
-    new QPngLineEdit("", ui->oldKey_edit,"oldKey.jpg",1);
-    new QPngLineEdit("", ui->newKey_edit,"newKey.jpg",1);
-    new QPngLineEdit("", ui->newKeyAgain_edit,"newKey.jpg",1);
+    new QPngLineEdit("", ui->oldKey_edit,"oldKey.png",1);
+    new QPngLineEdit("", ui->newKey_edit,"newKey.png",1);
+    new QPngLineEdit("", ui->newKeyAgain_edit,"newKey.png",1);
     //获取当前数据并将数据信息显示到界面中
     Session *curper = Session::getInstance();
     userId = curper->getUserId();

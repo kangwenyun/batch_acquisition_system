@@ -17,12 +17,12 @@ Registered::Registered(QWidget *parent) :
 {
     ui->setupUi(this);
     new QPngLineEdit("", ui->userid,"userid.png",0);
-    new QPngLineEdit("", ui->username,"name.jpg",0);
+    new QPngLineEdit("", ui->username,"name.png",0);
     new QPngLineEdit("", ui->passwd,"key.png",0);
     new QPngLineEdit("", ui->passwd_again,"key.png",0);
-    new QPngLineEdit("", ui->age,"age.jpg",0);
-    new QPngLineEdit("", ui->job,"job.jpg",0);
-    new QPngLineEdit("", ui->level,"level.jpg",0);
+    new QPngLineEdit("", ui->age,"age.png",0);
+    new QPngLineEdit("", ui->job,"job.png",0);
+    new QPngLineEdit("", ui->level,"level.png",0);
     //添加性别虚拟分组
     genderGroup=new QButtonGroup(this);
     genderGroup->addButton(ui->sex_man,0);
