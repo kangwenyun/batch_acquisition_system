@@ -1,7 +1,6 @@
 #include "viewbatch.h"
 #include "ui_viewbatch.h"
 #include "qres.h"
-#include "addbatch.h"
 #include "dbhelper.h"
 #include "qbatch.h"
 #include "qtray.h"
@@ -73,15 +72,6 @@ void ViewBatch::on_refresh_batch_clicked()
     }
     ui->tableWidget->selectRow(0);
     ui->tableWidget->setFocus(Qt::MouseFocusReason);
-}
-
-void ViewBatch::on_add_batch_clicked()
-{
-    addBatch adb;
-    if(adb.exec() == QDialog::Accepted)
-    {
-        on_refresh_batch_clicked();
-    }
 }
 
 void ViewBatch::on_tableWidget_clicked(const QModelIndex &index)

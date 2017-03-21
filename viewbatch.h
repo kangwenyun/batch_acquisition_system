@@ -18,7 +18,6 @@ public:
     ~ViewBatch();
 
 private slots:
-    void on_add_batch_clicked();
     void on_refresh_batch_clicked();
     void on_tableWidget_clicked(const QModelIndex &index);
 

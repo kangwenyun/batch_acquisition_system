@@ -18,11 +18,9 @@ public:
     ~ViewProLine();
    void refresh();
 private slots:
-    void on_treeWidget_doubleClicked(const QModelIndex &index);
-
     void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
-    void on_treeWidget_itemChanged(QTreeWidgetItem *item, int column);
+    void on_add_batch_clicked();
 
 private:
     Ui::ViewProLine *ui;

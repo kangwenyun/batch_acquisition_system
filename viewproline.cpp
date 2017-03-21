@@ -1,7 +1,8 @@
 #include "viewproline.h"
 #include "ui_viewproline.h"
-#include<dbhelper.h>
-#include<QMessageBox>
+#include "dbhelper.h"
+#include "addbatch.h"
+#include <QMessageBox>
 //生产线信息的查看
 ViewProLine::ViewProLine(QWidget *parent) :
     QWidget(parent),
@@ -58,11 +59,6 @@ ViewProLine::~ViewProLine()
     delete ui;
 }
 
-void ViewProLine::on_treeWidget_doubleClicked(const QModelIndex &index)
-{
-
-}
-
 void ViewProLine::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
     if(item->text(column)!= "未接受的批次" &&  item->text(column)!= "接受的批次" && item->text(column) != "审核中的批次" &&item->text(column) != "完成的批次")
@@ -117,7 +113,11 @@ void ViewProLine::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int col
     }
 }
 
-void ViewProLine::on_treeWidget_itemChanged(QTreeWidgetItem *item, int column)
+void ViewProLine::on_add_batch_clicked()
 {
-
+    addBatch adb;
+    if(adb.exec() == QDialog::Accepted)
+    {
+        refresh();
+    }
 }

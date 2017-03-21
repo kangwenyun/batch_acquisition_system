@@ -48,13 +48,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="add_batch">
-       <property name="text">
-        <string>增加</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item>

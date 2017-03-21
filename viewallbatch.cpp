@@ -1,7 +1,6 @@
 #include "viewallbatch.h"
 #include "ui_viewallbatch.h"
 #include "qres.h"
-#include "addbatch.h"
 #include "dbhelper.h"
 #include "qbatch.h"
 #include "qtray.h"
