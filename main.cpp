@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
     /*dbhelper *db = */dbhelper::getInstance();
 //    db->initdb();
     Login l;
+    l.resize(401,301);
+    l.move((a.desktop()->width() - l.width()) / 2, (a.desktop()->height() - l.height()) / 2);
     l.show();
     return a.exec();
 }
