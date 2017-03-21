@@ -1447,4 +1447,60 @@ Qres dbhelper::QcheckPermisson(QString userid)
     return _return;
 }
 
+QList<Qbatch> dbhelper::QgetcheckBatch()
+{
+    QSqlQuery query;
+    QList<Qbatch> list;
+    query.prepare("select * from Batch where status=? ");
+    query.addBindValue("check");
+    if(query.exec())
+    {
+        while(query.next())
+        {
+            QString batchid=query.value("batchid").toString();
+            QString batchsum=query.value("batchsum").toString();
+            QString batchamout=query.value("batchamout").toString();
+            QString status=query.value("status").toString();
+            Qbatch batch;
+            batch.batchamout=batchamout;
+            batch.batchid=batchid;
+            batch.batchsum=batchsum;
+            batch.status=status;
+            list.append(batch);
+        }
+        return list;
+    }
+    else
+    {
+        return list;
+    }
+}
 
+QList<Qbatch> dbhelper::QgetfinishBatch()
+{
+    QSqlQuery query;
+    QList<Qbatch> list;
+    query.prepare("select * from Batch where status=? ");
+    query.addBindValue("finish");
+    if(query.exec())
+    {
+        while(query.next())
+        {
+            QString batchid=query.value("batchid").toString();
+            QString batchsum=query.value("batchsum").toString();
+            QString batchamout=query.value("batchamout").toString();
+            QString status=query.value("status").toString();
+            Qbatch batch;
+            batch.batchamout=batchamout;
+            batch.batchid=batchid;
+            batch.batchsum=batchsum;
+            batch.status=status;
+            list.append(batch);
+        }
+        return list;
+    }
+    else
+    {
+        return list;
+    }
+}

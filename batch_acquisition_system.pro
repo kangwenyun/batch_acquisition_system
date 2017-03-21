@@ -65,7 +65,9 @@ SOURCES += main.cpp \
     mainwindowsforall.cpp \
     work.cpp \
     viewallbatch.cpp \
-    session.cpp
+    session.cpp \
+    checkbatch.cpp \
+    finishbatch.cpp
 
 HEADERS  += \
     login.h \
@@ -109,7 +111,9 @@ HEADERS  += \
     mainwindowsforall.h \
     work.h \
     myproxystyle.h \
-    viewallbatch.h
+    viewallbatch.h \
+    checkbatch.h \
+    finishbatch.h
 
 FORMS    += \
     login.ui \
@@ -137,7 +141,9 @@ FORMS    += \
     frmmessagebox.ui \
     frmmain.ui \
     mainwindowsforall.ui \
-    viewallbatch.ui
+    viewallbatch.ui \
+    checkbatch.ui \
+    finishbatch.ui
 
 RESOURCES += \
     icons.qrc \
