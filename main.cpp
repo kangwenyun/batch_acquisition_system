@@ -18,8 +18,8 @@ int main(int argc, char *argv[])
     myHelper::SetStyle("gray");//灰色风格
 //    myHelper::SetStyle("navy");//天蓝色风格
     myHelper::SetChinese();
-    /*dbhelper *db = */dbhelper::getInstance();
-//    db->initdb();
+    dbhelper *db = dbhelper::getInstance();
+    db->initdb();
     Login l;
     l.resize(401,301);
     l.move((a.desktop()->width() - l.width()) / 2, (a.desktop()->height() - l.height()) / 2);

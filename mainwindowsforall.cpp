@@ -123,5 +123,38 @@ mainwindowsforall::~mainwindowsforall()
 
 void mainwindowsforall::on_tabWidget_tabBarClicked(int index)
 {
-
+    if(index==4)
+    {//4
+        QPixmap pixmap1(":images/1.png");
+        QIcon icon1(pixmap1);
+        mainwdsforonepage *one =new mainwdsforonepage();
+        ui->tabWidget->removeTab(index);
+        ui->tabWidget->insertTab(4,one,icon1,"");
+    }
+    if(index==3)
+    {//3
+        QPixmap pixmap2(":images/2.png");
+        QIcon icon2(pixmap2);
+        mainwdsfortwopage *two =new mainwdsfortwopage();
+        ui->tabWidget->removeTab(index);
+        ui->tabWidget->insertTab(3,two,icon2,"");
+    }
+    if(index==1)
+    {
+        //1
+        QPixmap pixmap3(":images/3.png");
+        QIcon icon3(pixmap3);
+        mainwdsforthreepage *three =new mainwdsforthreepage();
+        ui->tabWidget->removeTab(index);
+        ui->tabWidget->insertTab(1,three,icon3,"");
+    }
+    if(index==0)
+    {
+        //0
+        QPixmap pixmap4(":images/4.png");
+        QIcon icon4(pixmap4);
+        mainwdsforfourpage *four =new mainwdsforfourpage();
+        ui->tabWidget->removeTab(index);
+        ui->tabWidget->insertTab(0,four,icon4,"");
+    }
 }
