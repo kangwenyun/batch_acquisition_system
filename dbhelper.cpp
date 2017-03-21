@@ -375,7 +375,8 @@ Qres dbhelper::QdeleteData( QString userid,  Product deleteproduct)
             // query.prepare("delete  from product where id = ?");
             //query.addBindValue((int)deleteproduct.id);
             //这里需要修改
-            query.prepare("delete   from product where number=? and tray=? and batchid=?");
+            query.prepare("delete   from product where id=? and  number=? and tray=? and batchid=?");
+            query.addBindValue(deleteproduct.id);
             query.addBindValue(deleteproduct.number);
             query.addBindValue(deleteproduct.tray);
             query.addBindValue(deleteproduct.batchid);
@@ -521,6 +522,7 @@ QList<Product> dbhelper::QgetDatathrouthTime(QString time)
         while(query.next())
         {
             Product temp;
+            temp.id=query.value("id").toInt();
             temp.number=query.value("number").toString();
             temp.type=query.value("type").toString();
             temp.batchid=query.value("batchid").toString();
@@ -909,6 +911,7 @@ Qres dbhelper::QgetBatchDetialThroughBatchid(QList<Qtray>& list,QString batchid)
                 while(squery.next())
                 {
                     Product tempproduct;
+                    tempproduct.id=squery.value("id").toInt();
                     tempproduct.batchid=batchid;
                     tempproduct.flag=squery.value("flag").toInt();
                     tempproduct.number=squery.value("number").toString();
@@ -1233,12 +1236,13 @@ QList<Product> dbhelper::QgetDataorderby(int attr,int pattern)
     QString Qpattern;
     switch(attr)
     {
-    case 0:Qattr="batchid";break;
-    case 1:Qattr="tray";break;
-    case 2:Qattr="number";break;
-    case 3:Qattr="type";break;
-    case 4:Qattr="time";break;
-    case 5:Qattr="flag";break;
+    case 0:Qattr="id";break;
+    case 1:Qattr="batchid";break;
+    case 2:Qattr="tray";break;
+    case 3:Qattr="number";break;
+    case 4:Qattr="type";break;
+    case 5:Qattr="time";break;
+    case 6:Qattr="flag";break;
     }
     if(pattern==1)
     {
@@ -1255,6 +1259,7 @@ QList<Product> dbhelper::QgetDataorderby(int attr,int pattern)
         while(query.next())
         {
             Product temp;
+            temp.id=query.value("id").toInt();
             temp.number=query.value("number").toString();
             temp.type=query.value("type").toString();
             temp.batchid=query.value("batchid").toString();
@@ -1412,7 +1417,7 @@ Qres dbhelper::QcheckPermisson(QString userid)
     {
         if(query.next())
         {
-            if( query.value(0).toString()=="0")
+            if( query.value(0).toString() == "0")
             {
                 _return.success=1;
                 _return.msg="you have enough permisson to operate";
@@ -1424,6 +1429,7 @@ Qres dbhelper::QcheckPermisson(QString userid)
                 _return.msg="you not have enough permisson to operate";
                 _return.error=0;
             }
+
         }
         else
         {

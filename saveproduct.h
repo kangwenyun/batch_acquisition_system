@@ -4,6 +4,7 @@
 #include "product.h"
 #include "dbhelper.h"
 #include "session.h"
+#include <QTableWidgetItem>
 #include <QDialog>
 #include <QString>
 #include <QDateTimeEdit>
@@ -34,6 +35,14 @@ private:
     QString userId;
     QDateTimeEdit *dateTimeEdit;
     bool acc;
+
+    //表格内容
+    QTableWidgetItem *id;
+    QTableWidgetItem *batchid;
+    QTableWidgetItem *tray;
+    QTableWidgetItem *number;
+    QTableWidgetItem *type;
+    QTableWidgetItem *flag;
 };
 
 #endif // SAVEPRODUCT_H

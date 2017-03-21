@@ -70,8 +70,6 @@ void ViewBatch::on_refresh_batch_clicked()
         batchamout->setTextAlignment(Qt::AlignCenter);
         ui->tableWidget->setItem(i,2,batchamout);
     }
-    ui->tableWidget->selectRow(0);
-    ui->tableWidget->setFocus(Qt::MouseFocusReason);
 }
 
 void ViewBatch::on_tableWidget_clicked(const QModelIndex &index)

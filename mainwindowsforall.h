@@ -28,9 +28,9 @@ private slots:
 
     void on_btnMenu_Min_clicked();
 
-    void on_pushButton_clicked();
+//    void on_pushButton_clicked();
 
-
+    void on_tabWidget_tabBarClicked(int index);
 
 private:
     Ui::mainwindowsforall *ui;

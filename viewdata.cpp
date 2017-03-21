@@ -2,18 +2,18 @@
 #include "ui_viewdata.h"
 #include "session.h"
 #include "product.h"
+#include "qpnglineedit.h"
+#include "work.h"
 #include <QList>
 #include <QTableWidgetItem>
-#include<work.h>
 //数据的维护
 ViewData::ViewData(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ViewData)
 {
     ui->setupUi(this);
-    ui->tableWidget->setColumnWidth(4,160);
-//    // 自适应列宽度
-//    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    new QPngLineEdit("", ui->findId,"find.png",1);
+    ui->tableWidget->setColumnWidth(5,160);
     //select only rows
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     //把选中模式设为单选，即每次只选中一行，而不能选中多行
@@ -25,7 +25,7 @@ ViewData::ViewData(QWidget *parent) :
     //定时检查文件并且刷新
     work* thread1=new work();
     QObject::connect(thread1, SIGNAL(log(QString)), this, SLOT(Log(QString)));
-   thread1->start();
+    thread1->start();
 }
 
 void ViewData::refresh()
@@ -43,7 +43,7 @@ void ViewData::refresh()
     }
     else
     {
-        qDebug()<<"数据发生了改变";
+//        qDebug()<<"数据发生了改变";
         QTextStream in(&file);
         while(!in.atEnd()) {
             QString line = in.readLine();
@@ -90,7 +90,10 @@ void ViewData::on_data_refresh_clicked()
     {
         j = 0;
         Product pro = proList[i];
-        //批次号,托盘号,货物号,货物类型,录入时间,备注
+        //id,批次号,托盘号,货物号,货物类型,录入时间,备注
+        QTableWidgetItem *id = new QTableWidgetItem(QObject::tr("%1").arg(pro.id));
+        id->setTextAlignment(Qt::AlignCenter);
+        ui->tableWidget->setItem(i,j++,id);
         QTableWidgetItem *batchid = new QTableWidgetItem(pro.batchid);
         batchid->setTextAlignment(Qt::AlignCenter);
         ui->tableWidget->setItem(i,j++,batchid);
@@ -109,5 +112,18 @@ void ViewData::on_data_refresh_clicked()
         QTableWidgetItem *flag = new QTableWidgetItem(QObject::tr("%1").arg(pro.flag));
         flag->setTextAlignment(Qt::AlignCenter);
         ui->tableWidget->setItem(i,j++,flag);
+    }
+}
+
+void ViewData::on_findId_textChanged(const QString &arg1)
+{
+    for(int i = 0; i < ui->tableWidget->rowCount(); i++)
+    {
+        QString id = ui->tableWidget->item(i,0)->text();
+        if(id == arg1)
+        {
+            ui->tableWidget->selectRow(i);
+            ui->tableWidget->setFocus(Qt::MouseFocusReason);
+        }
     }
 }

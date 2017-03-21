@@ -3,6 +3,7 @@
 #include "dbhelper.h"
 #include "product.h"
 #include "session.h"
+#include "qpnglineedit.h"
 #include <QList>
 #include <QString>
 #include <QFile>
@@ -16,9 +17,8 @@ MaintainData::MaintainData(QWidget *parent) :
     ui(new Ui::MaintainData)
 {
     ui->setupUi(this);
-//    // 自适应列宽度
-//    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    ui->tableWidget->setColumnWidth(4,160);
+    new QPngLineEdit("", ui->findId,"find.png",1);
+    ui->tableWidget->setColumnWidth(5,160);
     //select only rows
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     //把选中模式设为单选，即每次只选中一行，而不能选中多行
@@ -52,14 +52,15 @@ void MaintainData::on_data_change_clicked()
      row = ui->tableWidget->currentRow();
      if(row != -1)//已选中某行
      {
-         //批次号,托盘号,货物号,货物类型,录入时间,备注
+         //id,批次号,托盘号,货物号,货物类型,录入时间,备注
          bool ok;
-         curproduct.batchid = ui->tableWidget->item(row,0)->text();
-         curproduct.tray = ui->tableWidget->item(row,1)->text();
-         curproduct.number = ui->tableWidget->item(row,2)->text();
-         curproduct.type = ui->tableWidget->item(row,3)->text();
-         curproduct.time = ui->tableWidget->item(row,4)->text();
-         curproduct.flag = ui->tableWidget->item(row,5)->text().toInt(&ok,10);
+         curproduct.id = ui->tableWidget->item(row,0)->text().toInt(&ok,10);
+         curproduct.batchid = ui->tableWidget->item(row,1)->text();
+         curproduct.tray = ui->tableWidget->item(row,2)->text();
+         curproduct.number = ui->tableWidget->item(row,3)->text();
+         curproduct.type = ui->tableWidget->item(row,4)->text();
+         curproduct.time = ui->tableWidget->item(row,5)->text();
+         curproduct.flag = ui->tableWidget->item(row,6)->text().toInt(&ok,10);
          sp=new saveProduct();
          sp->setProduct(curproduct);
          if(sp->exec() == QDialog::Accepted)
@@ -88,12 +89,13 @@ void MaintainData::on_data_delete_clicked()
     //批次号,托盘号,物号,货物类型,录入时间,备注
     row = ui->tableWidget->currentRow() ;//当前行号
     bool ok;
-    curproduct.batchid = ui->tableWidget->item(row,0)->text();
-    curproduct.tray = ui->tableWidget->item(row,1)->text();
-    curproduct.number = ui->tableWidget->item(row,2)->text();
-    curproduct.type = ui->tableWidget->item(row,3)->text();
-    curproduct.time = ui->tableWidget->item(row,4)->text();
-    curproduct.flag = ui->tableWidget->item(row,5)->text().toInt(&ok,10);
+    curproduct.id = ui->tableWidget->item(row,0)->text().toInt(&ok,10);
+    curproduct.batchid = ui->tableWidget->item(row,1)->text();
+    curproduct.tray = ui->tableWidget->item(row,2)->text();
+    curproduct.number = ui->tableWidget->item(row,3)->text();
+    curproduct.type = ui->tableWidget->item(row,4)->text();
+    curproduct.time = ui->tableWidget->item(row,5)->text();
+    curproduct.flag = ui->tableWidget->item(row,6)->text().toInt(&ok,10);
     Qres qres;
     switch(QMessageBox::question(this,tr("询问"),tr("确定删除该行数据?"),
                 QMessageBox::Ok|QMessageBox::Cancel,QMessageBox::Ok))
@@ -139,14 +141,14 @@ void MaintainData::on_data_deleteAll_clicked()
 
 void MaintainData::onHeaderClicked(int col)
 {
-    QString labels[6] = {"批次号","托盘号","货物号","货物类型","录入时间","备注"};
+    QString labels[7] = {"id","批次号","托盘号","货物号","货物类型","录入时间","备注"};
     //按哪个排序就哪个加箭头,其余的删箭头
     int i;
     if(pattern == 1)
     {
         pattern = 2;
         //该表头换成递减图标,其余的还原
-        for(i = 0; i < 6; i++)
+        for(i = 0; i < 7; i++)
         {
             if(i != col)
             {
@@ -159,7 +161,7 @@ void MaintainData::onHeaderClicked(int col)
     }else{
         pattern = 1;
         //该表头换成递增图标,其余的还原
-        for(i = 0; i < 6; i++)
+        for(i = 0; i < 7; i++)
         {
             if(i != col)
             {
@@ -179,7 +181,7 @@ void MaintainData::load(QList<Product> proList)
     if( l == 0)
     {
         ui->tableWidget->setRowCount(1);
-        ui->tableWidget->setSpan(0,0,1,6);
+        ui->tableWidget->setSpan(0,0,1,7);
         ui->tableWidget->verticalHeader()->setVisible(false);
         QTableWidgetItem *item = new QTableWidgetItem(ui->dateEdit->date().toString("yyyy-MM-dd") + "日没有录入任何货物哦~~~");
         item->setTextAlignment(Qt::AlignCenter);
@@ -195,7 +197,10 @@ void MaintainData::load(QList<Product> proList)
     {
         j = 0;
         Product pro = proList[i];
-        //批次号,托盘号,货物号,货物类型,录入时间,备注
+        //id,批次号,托盘号,货物号,货物类型,录入时间,备注
+        QTableWidgetItem *id = new QTableWidgetItem(QObject::tr("%1").arg(pro.id));
+        id->setTextAlignment(Qt::AlignCenter);
+        ui->tableWidget->setItem(i,j++,id);
         QTableWidgetItem *batchid = new QTableWidgetItem(pro.batchid);
         batchid->setTextAlignment(Qt::AlignCenter);
         ui->tableWidget->setItem(i,j++,batchid);
@@ -228,4 +233,17 @@ void MaintainData::on_dateEdit_userDateChanged(const QDate &date)
 void MaintainData::on_tableWidget_doubleClicked(const QModelIndex &index)
 {
     on_data_change_clicked();
+}
+
+void MaintainData::on_findId_textChanged(const QString &arg1)
+{
+    for(int i = 0; i < ui->tableWidget->rowCount(); i++)
+    {
+        QString id = ui->tableWidget->item(i,0)->text();
+        if(id == arg1)
+        {
+            ui->tableWidget->selectRow(i);
+            ui->tableWidget->setFocus(Qt::MouseFocusReason);
+        }
+    }
 }

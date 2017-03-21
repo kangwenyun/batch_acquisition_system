@@ -38,6 +38,8 @@ private slots:
 
     void on_tableWidget_doubleClicked(const QModelIndex &index);
 
+    void on_findId_textChanged(const QString &arg1);
+
 private:
     Ui::MaintainData *ui;
     QString userId;//当前用户id

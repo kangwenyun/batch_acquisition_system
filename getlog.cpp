@@ -20,8 +20,6 @@ GetLog::GetLog(QWidget *parent) :
     ui->tableWidget->setColumnWidth(1,70);
     ui->tableWidget->setRowCount(0);
 
-//    // 自适应列宽度
-//    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     //加载数据
     QDateTime time = QDateTime::currentDateTime();
     QString fileTime = time.toString("yyyy-MM-dd")+".txt";
@@ -31,7 +29,6 @@ GetLog::GetLog(QWidget *parent) :
     ui->dateEdit->setMinimumDate(d);
     ui->dateEdit->setMaximumDate(QDate::currentDate());
     ui->dateEdit->setDate(QDate::currentDate());
-
 }
 
 GetLog::~GetLog()

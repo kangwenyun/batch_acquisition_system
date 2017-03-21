@@ -17,13 +17,9 @@ void ViewProLine::refresh()
     ui->treeWidget->clear();
     list= dbhelper::getInstance()->QgetallBatch();
     QTreeWidgetItem* A = new QTreeWidgetItem(QStringList()<<"未接受的批次");
-    A->setCheckState(0, Qt::Checked);
     QTreeWidgetItem* B = new QTreeWidgetItem(QStringList()<<"接受的批次");
-    B->setCheckState(0, Qt::Checked);
     QTreeWidgetItem* C = new QTreeWidgetItem(QStringList()<<"审核中的批次");
-    C->setCheckState(0, Qt::Checked);
     QTreeWidgetItem* D = new QTreeWidgetItem(QStringList()<<"完成的批次");
-    D->setCheckState(0, Qt::Checked);
     ui->treeWidget->addTopLevelItem(A);
     ui->treeWidget->addTopLevelItem(B);
     ui->treeWidget->addTopLevelItem(C);

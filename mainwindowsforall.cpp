@@ -116,14 +116,19 @@ void mainwindowsforall::on_btnMenu_Min_clicked()
     this->showMinimized();
 }
 
-void mainwindowsforall::on_pushButton_clicked()
-{
-    myHelper::ShowMessageBoxInfo("恭喜你获得我公司送出的1000万元大礼一份!");
-}
+//void mainwindowsforall::on_pushButton_clicked()
+//{
+//    myHelper::ShowMessageBoxInfo("恭喜你获得我公司送出的1000万元大礼一份!");
+//}
 
 
 
 mainwindowsforall::~mainwindowsforall()
 {
     delete ui;
+}
+
+void mainwindowsforall::on_tabWidget_tabBarClicked(int index)
+{
+
 }
