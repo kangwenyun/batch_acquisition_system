@@ -146,6 +146,6 @@ FORMS    += \
     finishbatch.ui
 
 RESOURCES += \
-    icons.qrc \
-    rc.qrc
+    rc.qrc \
+    icons.qrc
 
